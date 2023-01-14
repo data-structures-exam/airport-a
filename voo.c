@@ -2,6 +2,8 @@
 #include "data.h"
 #include "utils.h"
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 struct tVoo {
 	int num;
@@ -12,6 +14,11 @@ struct tVoo {
 
 Voo *criar_voo(int num, Data data, char origem[], char destino[]) {
 	Voo *voo = (Voo *)malloc(sizeof(Voo));
+	if(!voo) {
+		printf("Erro: malloc falhou em 'criar_voo'\n");
+		return NULL;
+	}
+
 	voo->num = num;
 	voo->data = data;
 	strcpy(voo->origem, origem);
