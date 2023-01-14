@@ -1,13 +1,12 @@
 #include "voo.h"
 #include "data.h"
+#include "utils.h"
 #include <string.h>
-
-#define STR_MAX_SIZE 40
 
 struct tVoo {
 	int num;
 	Data data;
-	char origem[STR_MAX_SIZE], destino[STR_MAX_SIZE];
+	char origem[STR_TAM_MAX], destino[STR_TAM_MAX];
 	int fechado; // 0 se o avião não está pronto, 1 caso contrário
 };
 
