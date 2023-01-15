@@ -7,7 +7,7 @@
 
 struct tPilha_Bagagem {
 	Bagagem *bagagens[MAX_BAGS_PILHA];
-	int topo = -1;
+	int topo;
 };
 
 Pilha_Bagagem *criar_pilha_bagagem() {
