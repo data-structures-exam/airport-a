@@ -36,21 +36,21 @@ void desempilhar_bagagem(Pilha_Bagagem *pilha) {
 		return;
 	}
 
-	destruir_bagagem(pilha->bagagens[pilha->top--]);
+	destruir_bagagem(pilha->bagagens[pilha->topo--]);
 }
 
 int pilha_vazia(Pilha_Bagagem *pilha) {
-	return pilha->top < 0;
+	return pilha->topo < 0;
 }
 
 void destruir_pilha_bagagem(Pilha_Bagagem *pilha) {
-	while (pilha->top-- >= 0)
-		destruir_bagagem(pilha->bagagens[pilha->top]);
+	while (pilha->topo-- >= 0)
+		destruir_bagagem(pilha->bagagens[pilha->topo]);
 	free(pilha);
 }
 
 int stack_overflow(Pilha_Bagagem *pilha) {
-	return pilha->top >= MAX_BAGS_PILHA - 1;
+	return pilha->topo >= MAX_BAGS_PILHA - 1;
 }
 
 
