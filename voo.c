@@ -10,6 +10,7 @@ struct tVoo {
 	Data data;
 	char origem[STR_TAM_MAX], destino[STR_TAM_MAX];
 	int fechado; // 0 se o avião não está pronto, 1 caso contrário
+	struct tVoo *prox;
 };
 
 Voo *criar_voo(int num, Data data, char origem[], char destino[]) {
@@ -24,6 +25,7 @@ Voo *criar_voo(int num, Data data, char origem[], char destino[]) {
 	strcpy(voo->origem, origem);
 	strcpy(voo->destino, destino);
 	voo->fechado = 0;
+	voo->prox = NULL;
 	
 	return voo;
 }
