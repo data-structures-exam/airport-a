@@ -9,7 +9,9 @@ typedef struct tVoo Voo;
 Voo *criar_voo(int num, Data data, char origem[], char destino[]);
 void carregar_palete(Voo *voo, Palete *p);
 bool porao_cheio(Voo *voo);
+bool porao_vazio(Voo *voo);
 void destruir_voo(Voo *voo);
 void fechar_voo(Voo *voo);
+bool voo_fechado(Voo *voo);
 
 #endif

@@ -13,7 +13,7 @@ struct tVoo {
 	int num;
 	Data data;
 	char origem[STR_TAM_MAX], destino[STR_TAM_MAX];
-	int fechado; // 0 se o avião não está pronto, 1 caso contrário
+	bool fechado; // false se o avião não está pronto, true caso contrário
 	struct tVoo *prox;
 	int pos; // refere-se à lista de paletes
 	Palete *paletes[MAX_PAL_VOO];
@@ -30,7 +30,7 @@ Voo *criar_voo(int num, Data data, char origem[], char destino[]) {
 	voo->data = data;
 	strcpy(voo->origem, origem);
 	strcpy(voo->destino, destino);
-	voo->fechado = 0;
+	voo->fechado = false;
 	voo->prox = NULL;
 	
 	return voo;
@@ -54,7 +54,24 @@ bool porao_cheio(Voo *voo) {
 	return voo->pos >= MAX_PAL_VOO - 1;
 }
 
+bool porao_vazio(Voo *voo) {
+	return voo->pos == -1;
+}
+
 void destruir_voo(Voo *voo) {
 	free(voo);
 }
+
+void fechar_voo(Voo *voo) {
+	if(porao_vazio(voo)) {
+		printf("Erro: porão vazio\n");
+		return;
+	}
+	voo->fechado = true;
+}
+
+bool voo_fechado(Voo *voo) {
+	return voo->fechado;
+}
+
 
