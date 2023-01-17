@@ -37,7 +37,7 @@ Voo *criar_voo(int num, Data data, char origem[], char destino[]) {
 }
 
 void carregar_palete(Voo *voo, Palete *p) {
-	if(porao_cheio) {
+	if(porao_cheio(voo)) {
 		printf("Erro: porão do avião cheio\n");
 		return;
 	}
