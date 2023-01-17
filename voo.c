@@ -51,7 +51,7 @@ void carregar_palete(Voo *voo, Palete *p) {
 }	
 
 bool porao_cheio(Voo *voo) {
-	return voo->pos >= MAX_PAL_VOO;
+	return voo->pos >= MAX_PAL_VOO - 1;
 }
 
 void destruir_voo(Voo *voo) {

@@ -28,11 +28,16 @@ void inserir_bagagens(Palete *p, Pilha_Bagagem *pilha_bagagens){
 		return;
 	}
 
+	if(p->num_voo != pilha_bagagens->num_voo) {
+		printf("Erro: número de voo da palete e da pilha não correspondem\n");
+		return;
+	}
+
 	p->pilha_bagagens[++p->pos] = pilha_bagagens;		
 }
 
 bool palete_cheia(Palete *p) {
-	return p->pos >= NUM_MAX_PILHA;
+	return p->pos >= NUM_MAX_PILHA - 1;
 }
 
 bool palete_vazia(Palete *p) {
