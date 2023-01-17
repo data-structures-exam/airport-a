@@ -15,7 +15,6 @@ Bagagem *criar_bagagem(char nome_passageiro[], int num_voo, float peso_kg) {
 		printf ("Erro: malloc falhou em 'criar_bagagem'\n");
 		return NULL;
 	}
-
 	strcpy(bag->nome_passageiro, nome_passageiro);
 	bag->num_voo = num_voo;
 	if (peso_valido(peso_kg))

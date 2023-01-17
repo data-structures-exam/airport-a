@@ -1,5 +1,6 @@
 #include "pista.h"
 #include "voo.h"
+#include "bagagem.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -14,7 +15,7 @@ Pista *criar_pista(int num) {
 		printf ("Erro: malloc falhou em 'criar_pista'\n");
 		return NULL;
 	}
-
+	
 	pista->num = num;
 	pista->ini = pista->fim = NULL;
 	return pista;

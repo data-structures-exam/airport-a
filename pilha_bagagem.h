@@ -1,8 +1,7 @@
 #ifndef PILHA_BAGAGEM_H
 #define PILHA_BAGAGEM_H
 
-#include "bagagem.h"
-
+#include "bagagem.c"
 typedef struct tPilha_Bagagem Pilha_Bagagem;
 
 Pilha_Bagagem *criar_pilha_bagagem();
