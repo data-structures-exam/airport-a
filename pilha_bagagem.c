@@ -6,16 +6,17 @@
 
 struct tPilha_Bagagem {
 	Bagagem *bagagens[MAX_BAGS_PILHA];
-	int topo;
+	int num_voo, topo;
 };
 
-Pilha_Bagagem *criar_pilha_bagagem() {
+Pilha_Bagagem *criar_pilha_bagagem(int num_voo) {
 	Pilha_Bagagem *pilha = (Pilha_Bagagem *)malloc(sizeof(Pilha_Bagagem));
 	if (!pilha) {
 		printf("Erro: malloc falhou em 'criar_pilha_bagagem'\n");
 		return NULL;
 	}
 	pilha->topo = -1;
+	pilha->num_voo = num_voo;
 	return pilha;
 }
 void empilhar_bagagem(Pilha_Bagagem *pilha, Bagagem *bag) {
