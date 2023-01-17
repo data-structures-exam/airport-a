@@ -4,16 +4,17 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#define NUM_MAX_PILHA 3 // número máximo de pilhas de bagagens por palete
+
 struct tPalete{
   int num_voo, pos;
-  Pilha_Bagagem *pilha_bagagens[3];
-  struct tPalete *prox;   
+  Pilha_Bagagem *pilha_bagagens[NUM_MAX_PILHA];
 };
 
-ListaPalete *criarListaPalete(int num_voo){
-    ListaPalete *novo = (ListaPalete *)malloc(sizeof(ListaPalete));
+Palete *criar_palete(int num_voo){
+    Palete *novo = (Palete *)malloc(sizeof(Palete));
     if(!novo){
-        puts("Erro: alocacao de memoria invalida");
+        printf("Erro: malloc falhou em 'criar_palete'\n");
         return NULL;
     }
     novo->pos = -1;
@@ -21,32 +22,30 @@ ListaPalete *criarListaPalete(int num_voo){
     return novo;
 }
 
-void adicionarBagagemPalete(ListaPalete **l, Pilha_Bagagem *pilha_bagagens){
-    ListaPalete *aux  = *l;
-    while(!pilha_vazia(pilha_bagagens)){
-        Bagagem *B = pilha_bagagens->bagagens[pilha_bagagens->topo];
-        bool found = false;
-        while(aux->prox){
-            if(aux->num_voo == B->num_voo){
-                aux->pilha_bagagens[++aux->pos] = B;
-                found = true;
-                break;
-            }
-            aux = aux->prox;
-        }
-        if(!found){
-            ListaPalete *novo = criarListaPalete(B->num_voo);
-            novo->pilha_bagagens[++novo->pos] = B;
-            novo->prox = *l;
-            *l = novo;
-        }
-        desempilhar_bagagem(pilha_bagagens);
-    }
+void inserir_bagagens(Palete *p, Pilha_Bagagem *pilha_bagagens){
+	if(palete_cheia(p)) {
+		printf("Erro: palete cheia\n");
+		return;
+	}
+
+	p->pilha_bagagens[++p->pos] = pilha_bagagens;		
 }
 
-void destruirPalete(ListaPalete **l){
-    while(*l){
-        destruir_pilha_bagagem((*l)->pilha_bagagens);
-        *l = (*l)->prox;
-    }
+bool palete_cheia(Palete *p) {
+	return p->pos >= NUM_MAX_PILHA;
 }
+
+bool palete_vazia(Palete *p) {
+	return p->pos == -1;
+}
+
+void destruir_palete(Palete *p){
+	if (!palete_vazia(p)) {
+		while (p->pos >= 0)
+			destruir_pilha_bagagem(p->pilha_bagagens[p->pos--]);
+	}
+
+	free(p);
+}
+
+
