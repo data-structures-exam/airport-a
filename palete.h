@@ -1,14 +1,12 @@
-#ifndef LISTA_PALETE_H
-#define LISTA_PALETE_H
+#ifndef PALETE_H
+#define PALETE_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include "pilha_bagagem.c"
+#include "pilha_bagagem.h"
 
-typedef struct tPalete ListaPalete;
+typedef struct tPalete Palete;
 
-ListaPalete *criarListaPalete(int num_voo);
-void adicionarBagagemPalete(ListaPalete **l, Pilha_Bagagem *pilha_bagagens);
+Palete *criar_palete(int num_voo);
+void inserir_bagagens(ListaPalete **l, Pilha_Bagagem *pilha_bagagens);
 void destruirPalete(ListaPalete **l);
+
 #endif

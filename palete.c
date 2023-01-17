@@ -1,4 +1,8 @@
 #include "lista_palete.h"
+#include "pilha_bagagem.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 struct tPalete{
   int num_voo, pos;
