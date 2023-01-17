@@ -1,5 +1,4 @@
 #include "pilha_bagagem.h"
-#include "bagagem.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -16,17 +15,14 @@ Pilha_Bagagem *criar_pilha_bagagem() {
 		printf("Erro: malloc falhou em 'criar_pilha_bagagem'\n");
 		return NULL;
 	}
-
 	pilha->topo = -1;
 	return pilha;
 }
-
 void empilhar_bagagem(Pilha_Bagagem *pilha, Bagagem *bag) {
 	if(stack_overflow(pilha)) {
 		printf("Erro: pilha cheia\n");
 		return;
 	}
-
 	pilha->bagagens[++pilha->topo] = bag;
 }
 
