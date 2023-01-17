@@ -24,6 +24,11 @@ void empilhar_bagagem(Pilha_Bagagem *pilha, Bagagem *bag) {
 		printf("Erro: pilha cheia\n");
 		return;
 	}
+
+	if(pilha->num_voo != bag->num_voo) {
+		printf("Erro: número de voo da pilha e da bagagem não correspondem\n");
+		return;
+	}
 	pilha->bagagens[++pilha->topo] = bag;
 }
 
