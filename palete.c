@@ -1,4 +1,4 @@
-#include "lista_palete.h"
+#include "palete.h"
 #include "pilha_bagagem.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -47,5 +47,3 @@ void destruir_palete(Palete *p){
 
 	free(p);
 }
-
-
