@@ -37,6 +37,10 @@ void inserir_bagagens(Palete *p, Pilha_Bagagem *pilha_bagagens){
 }
 
 bool palete_cheia(Palete *p) {
+	return limite_pilhas_atingido(p) && pilha_cheia(p->pilha_bagagens[p->pos]);
+}
+
+bool limite_pilhas_atingido(Palete *p) {
 	return p->pos >= NUM_MAX_PILHA - 1;
 }
 
