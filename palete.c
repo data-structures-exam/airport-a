@@ -24,6 +24,16 @@ Palete *criar_palete(int num_voo){
 }
 
 void inserir_bagagens(Palete *p, Pilha_Bagagem *pilha_bagagens){
+	if (!p) {
+		printf ("Erro: palete inválida/nula\n");
+		return;
+	}
+
+	if (!pilha_bagagens) {
+		printf ("Erro: pilha de bagagens inválida/nula\n");
+		return;
+	}
+
 	if(limite_pilhas_atingido(p)) {
 		printf("Erro: limite de pilhas de bagagem por palete atingido\n");
 		return;
@@ -52,18 +62,34 @@ void inserir_bagagem(Palete *p, Bagagem *bag) {
 }
 
 bool palete_cheia(Palete *p) {
+	if (!p) {
+		printf ("Erro: palete inválida/nula\n");
+		return false;
+	}
+
 	return limite_pilhas_atingido(p) && pilha_cheia(p->pilha_bagagens[p->pos]);
 }
 
 bool limite_pilhas_atingido(Palete *p) {
+	if (!p) {
+		printf ("Erro: palete inválida/nula\n");
+		return false;
+	}
+
 	return p->pos >= NUM_MAX_PILHA - 1;
 }
 
 bool palete_vazia(Palete *p) {
+	if (!p) {
+		printf ("Erro: palete inválida/nula\n");
+		return false;
+	}
+
 	return p->pos == -1;
 }
 
 void destruir_palete(Palete *p){
+	if (!p) return;
 	if (!palete_vazia(p)) {
 		while (p->pos >= 0)
 			destruir_pilha_bagagem(p->pilha_bagagens[p->pos--]);

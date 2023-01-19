@@ -37,6 +37,16 @@ Voo *criar_voo(int num, Data data, char origem[], char destino[]) {
 }
 
 void carregar_palete(Voo *voo, Palete *p) {
+	if (!voo) {
+		printf ("Erro: voo inválido/nulo\n");
+		return;
+	}
+
+	if (!p) {
+		printf ("Erro: palete inválida/nula\n");
+		return;
+	}
+
 	if(porao_cheio(voo)) {
 		printf("Erro: porão do avião cheio\n");
 		return;
@@ -51,26 +61,49 @@ void carregar_palete(Voo *voo, Palete *p) {
 }	
 
 bool porao_cheio(Voo *voo) {
+	if (!voo) {
+		printf ("Erro: voo inválido/nulo\n");
+		return;
+	}
+
 	return voo->pos >= MAX_PAL_VOO - 1;
 }
 
 bool porao_vazio(Voo *voo) {
+	if (!voo) {
+		printf ("Erro: voo inválido/nulo\n");
+		return;
+	}
+
 	return voo->pos == -1;
 }
 
 void destruir_voo(Voo *voo) {
+	if (!voo) return;
+
 	free(voo);
 }
 
 void fechar_voo(Voo *voo) {
+	if (!voo) {
+		printf ("Erro: voo inválido/nulo\n");
+		return;
+	}
+
 	if(porao_vazio(voo)) {
 		printf("Erro: porão vazio\n");
 		return;
 	}
+	
 	voo->fechado = true;
 }
 
 bool voo_fechado(Voo *voo) {
+	if (!voo) {
+		printf ("Erro: voo inválido/nulo\n");
+		return;
+	}
+
 	return voo->fechado;
 }
 

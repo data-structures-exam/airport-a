@@ -22,6 +22,16 @@ Pista *criar_pista(int num) {
 }
 
 void enfileirar_voo(Pista *pista, Voo *voo) {
+	if (!pista) {
+		printf ("Erro: pista inválida/nula\n");
+		return;
+	}
+
+	if (!voo) {
+		printf ("Erro: voo inválido/nulo\n");
+		return;
+	}
+
 	if (!pista->ini) {
 		pista->ini = pista->fim = voo;
 		return;
@@ -32,6 +42,11 @@ void enfileirar_voo(Pista *pista, Voo *voo) {
 }
 
 void desenfileirar_voo(Pista *pista) {
+	if (!pista) {
+		printf ("Erro: pista inválida/nula\n");
+		return;
+	}
+
 	if (!pista->ini) return;
 	
 	Voo *aux = pista->ini;
@@ -41,6 +56,11 @@ void desenfileirar_voo(Pista *pista) {
 }
 
 void destruir_pista(Pista *pista) {
+	if (!pista) {
+		printf ("Erro: pista inválida/nula\n");
+		return;
+	}
+
 	Pista *aux = pista->ini->prox;
 	while(pista->ini) {
 		destruir_voo(pista->ini);

@@ -33,5 +33,6 @@ int peso_valido(float peso) {
 }
 
 void destruir_bagagem(Bagagem *bag) {
+	if (!bag) return;
 	free(bag);
 }

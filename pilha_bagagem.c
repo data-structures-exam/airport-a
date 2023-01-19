@@ -20,6 +20,16 @@ Pilha_Bagagem *criar_pilha_bagagem(int num_voo) {
 	return pilha;
 }
 void empilhar_bagagem(Pilha_Bagagem *pilha, Bagagem *bag) {
+	if (!pilha) {
+		printf ("Erro: pilha de bagagens inválida/nula\n");
+		return;
+	}
+
+	if (!bag) {
+		printf ("Erro: bagagem inválida/nula\n");
+		return;
+	}
+
 	if(pilha_cheia(pilha)) {
 		printf("Erro: pilha cheia\n");
 		return;
@@ -33,6 +43,11 @@ void empilhar_bagagem(Pilha_Bagagem *pilha, Bagagem *bag) {
 }
 
 void desempilhar_bagagem(Pilha_Bagagem *pilha) {
+	if (!pilha) {
+		printf ("Erro: pilha de bagagens inválida/nula\n");
+		return;
+	}	
+
 	if(pilha_vazia(pilha)) {
 		printf("Erro: pilha vazia\n");
 		return;
@@ -42,16 +57,31 @@ void desempilhar_bagagem(Pilha_Bagagem *pilha) {
 }
 
 int pilha_vazia(Pilha_Bagagem *pilha) {
+	if (!pilha) {
+		printf ("Erro: pilha de bagagens inválida/nula\n");
+		return;
+	}
+
 	return pilha->topo < 0;
 }
 
 void destruir_pilha_bagagem(Pilha_Bagagem *pilha) {
+	if (!pilha) {
+		printf ("Erro: pilha de bagagens inválida/nula\n");
+		return;
+	}
+
 	while (pilha->topo-- >= 0)
 		destruir_bagagem(pilha->bagagens[pilha->topo]);
 	free(pilha);
 }
 
 int pilha_cheia(Pilha_Bagagem *pilha) {
+	if (!pilha) {
+		printf ("Erro: pilha de bagagens inválida/nula\n");
+		return;
+	}
+
 	return pilha->topo >= MAX_BAGS_PILHA - 1;
 }
 
