@@ -1,5 +1,6 @@
 #include "palete.h"
 #include "pilha_bagagem.h"
+#include "bagagem.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -23,8 +24,8 @@ Palete *criar_palete(int num_voo){
 }
 
 void inserir_bagagens(Palete *p, Pilha_Bagagem *pilha_bagagens){
-	if(palete_cheia(p)) {
-		printf("Erro: palete cheia\n");
+	if(limite_pilhas_atingido(p)) {
+		printf("Erro: limite de pilhas de bagagem por palete atingido\n");
 		return;
 	}
 
@@ -34,6 +35,20 @@ void inserir_bagagens(Palete *p, Pilha_Bagagem *pilha_bagagens){
 	}
 
 	p->pilha_bagagens[++p->pos] = pilha_bagagens;		
+}
+
+void inserir_bagagem(Palete *p, Bagagem *bag) {
+	if (!bag) {
+		printf ("Erro: bagagem inválida/nula\n");
+		return;
+	}
+
+	if (palete_cheia(p)) {
+		printf ("Erro: palete cheia\n");
+		return;
+	}
+
+	empilhar_bagagem(p->pilha_bagagens[p->pos], bag);		
 }
 
 bool palete_cheia(Palete *p) {
