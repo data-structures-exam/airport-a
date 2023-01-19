@@ -20,7 +20,7 @@ Pilha_Bagagem *criar_pilha_bagagem(int num_voo) {
 	return pilha;
 }
 void empilhar_bagagem(Pilha_Bagagem *pilha, Bagagem *bag) {
-	if(stack_overflow(pilha)) {
+	if(pilha_cheia(pilha)) {
 		printf("Erro: pilha cheia\n");
 		return;
 	}
@@ -51,7 +51,7 @@ void destruir_pilha_bagagem(Pilha_Bagagem *pilha) {
 	free(pilha);
 }
 
-int stack_overflow(Pilha_Bagagem *pilha) {
+int pilha_cheia(Pilha_Bagagem *pilha) {
 	return pilha->topo >= MAX_BAGS_PILHA - 1;
 }
 

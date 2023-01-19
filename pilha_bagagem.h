@@ -1,5 +1,3 @@
-#ifndef PILHA_BAGAGEM_H
-#define PILHA_BAGAGEM_H
 
 #include "bagagem.h"
 
@@ -10,6 +8,6 @@ void empilhar_bagagem(Pilha_Bagagem *pilha, Bagagem *bag);
 void desempilhar_bagagem(Pilha_Bagagem *pilha);
 int pilha_vazia(Pilha_Bagagem *pilha);
 void destruir_pilha_bagagem(Pilha_Bagagem *pilha);
-int stack_overflow(Pilha_Bagagem *pilha);
+int pilha_cheia(Pilha_Bagagem *pilha);
 
 #endif
