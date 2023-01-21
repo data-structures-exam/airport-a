@@ -61,9 +61,9 @@ bool lista_vazia(Lista_Palete *L){
 }
 
 void destruir_lista_palete(Lista_Palete *L){
-    while(lista_vazia(L)){
+    while(!lista_vazia(L)){
         destruir_palete(L->p);
-        free(L);
         L = L->prox;
+        free(L);
     }
 }

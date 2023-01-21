@@ -80,7 +80,7 @@ bool porao_vazio(Voo *voo) {
 
 void destruir_voo(Voo *voo) {
 	if (!voo) return;
-
+	
 	free(voo);
 }
 
