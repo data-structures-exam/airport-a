@@ -6,7 +6,7 @@
 
 typedef struct tVoo Voo;
 
-Voo *criar_voo(int num, Data data, char origem[], char destino[]);
+Voo *criar_voo(int num, Data *data, char origem[], char destino[]);
 void carregar_palete(Voo *voo, Palete *p);
 bool porao_cheio(Voo *voo);
 bool porao_vazio(Voo *voo);

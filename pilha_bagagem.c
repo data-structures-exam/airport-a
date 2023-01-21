@@ -1,3 +1,4 @@
+
 #include "pilha_bagagem.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,12 +20,13 @@ Pilha_Bagagem *criar_pilha_bagagem(int num_voo) {
 	pilha->num_voo = num_voo;
 	return pilha;
 }
+
 void empilhar_bagagem(Pilha_Bagagem *pilha, Bagagem *bag) {
 	if (!pilha) {
 		printf ("Erro: pilha de bagagens inválida/nula\n");
 		return;
 	}
-
+	
 	if (!bag) {
 		printf ("Erro: bagagem inválida/nula\n");
 		return;

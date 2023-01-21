@@ -1,3 +1,5 @@
+#ifndef PILHA_BAGAGEM_H
+#define PILHA_BAGAGEM_H
 
 #include "bagagem.h"
 

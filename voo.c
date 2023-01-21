@@ -11,7 +11,7 @@
 
 struct tVoo {
 	int num;
-	Data data;
+	Data *data;
 	char origem[STR_TAM_MAX], destino[STR_TAM_MAX];
 	bool fechado; // false se o avião não está pronto, true caso contrário
 	struct tVoo *prox;
@@ -19,7 +19,7 @@ struct tVoo {
 	Palete *paletes[MAX_PAL_VOO];
 };
 
-Voo *criar_voo(int num, Data data, char origem[], char destino[]) {
+Voo *criar_voo(int num, Data *data, char origem[], char destino[]) {
 	Voo *voo = (Voo *)malloc(sizeof(Voo));
 	if(!voo) {
 		printf("Erro: malloc falhou em 'criar_voo'\n");
@@ -89,12 +89,10 @@ void fechar_voo(Voo *voo) {
 		printf ("Erro: voo inválido/nulo\n");
 		return;
 	}
-
 	if(porao_vazio(voo)) {
 		printf("Erro: porão vazio\n");
 		return;
 	}
-	
 	voo->fechado = true;
 }
 
@@ -103,7 +101,6 @@ bool voo_fechado(Voo *voo) {
 		printf ("Erro: voo inválido/nulo\n");
 		return;
 	}
-
 	return voo->fechado;
 }
 
