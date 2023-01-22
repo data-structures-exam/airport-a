@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "lista_voo.h"
-#include "voo.h"
 
 struct tListaVoo{
     Voo *voo;
@@ -10,7 +9,6 @@ struct tListaVoo{
 Lista_Voo *criar_lista_voo(){
     return NULL;
 }
-
 
 void adicionar_voo(Lista_Voo **L, Voo *voo){
     if(!L){
@@ -31,7 +29,7 @@ Voo *verificar_voo_numero(Lista_Voo *L, int num_voo){
     while(aux->voo->num != num_voo && aux)aux = aux->prox;
     return aux->voo;
 }
-void remover_palete(Lista_Voo **L, int num_voo){
+void remover_voo(Lista_Voo **L, int num_voo){
     if(!L){
         printf("Erro: Lista de paletes inexestintes\n");
         return;
@@ -61,7 +59,7 @@ bool lista_vazia(Lista_Voo *L){
     return L == NULL;
 }
 
-void destruir_lista_palete(Lista_Voo *L){
+void destruir_lista_voo(Lista_Voo *L){
     while(!lista_vazia(L)){
         destruir_voo(L->voo);
         L = L->prox;
