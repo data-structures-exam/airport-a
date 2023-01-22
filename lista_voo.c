@@ -17,7 +17,7 @@ void adicionar_voo(Lista_Voo **L, Voo *voo){
     }
     Lista_Voo *l = (Lista_Voo *)malloc(sizeof(Lista_Voo));
     if(!l){
-        printf("Erro: malloc falhou em 'adicionar_palete'\n");
+        printf("Erro: malloc falhou em 'adicionar_voo'\n");
         return;
     }
     l->voo = voo;
@@ -31,7 +31,7 @@ Voo *verificar_voo_numero(Lista_Voo *L, int num_voo){
 }
 void remover_voo(Lista_Voo **L, int num_voo){
     if(!L){
-        printf("Erro: Lista de paletes inexestintes\n");
+        printf("Erro: Lista de voos inexestintes\n");
         return;
     }
     Lista_Voo *aux;
