@@ -3,10 +3,12 @@
 #include "bagagem.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "lista_voo.c"
+
 
 struct tPista {
 	int num;
-	Voo *ini, *fim;
+	Lista_Voo *ini, *fim;
 };
 
 Pista *criar_pista(int num) {
@@ -60,11 +62,10 @@ void destruir_pista(Pista *pista) {
 		printf ("Erro: pista inválida/nula\n");
 		return;
 	}
-
 	Pista *aux = pista->ini->prox;
 	while(pista->ini) {
 		destruir_voo(pista->ini);
 		pista->ini = aux;
-		aux = aux->next;
+		aux = aux->ini->prox;
 	}
 }

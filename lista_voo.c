@@ -55,7 +55,7 @@ void remover_voo(Lista_Voo **L, int num_voo){
     }
 }
 
-bool lista_vazia(Lista_Voo *L){
+int lista_vazia(Lista_Voo *L){
     return L == NULL;
 }
 

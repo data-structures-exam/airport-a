@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include "palete.c"
+#include <stdbool.h>
 #include "lista_palete.h"
 
 struct tListaPalete{

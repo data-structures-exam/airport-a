@@ -1,7 +1,6 @@
 #ifndef LISTA_PALETE_H
 #define LISTA_PALETE_H
 
-#include "palete.h"
 #include <stdbool.h>
 typedef struct tListaPalete Lista_Palete;
 

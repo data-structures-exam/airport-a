@@ -1,6 +1,6 @@
 #include "voo.h"
 #include "data.h"
-#include "palete.h"
+#include "palete.c"
 #include "utils.h"
 #include <string.h>
 #include <stdio.h>
@@ -14,7 +14,6 @@ struct tVoo {
 	Data *data;
 	char origem[STR_TAM_MAX], destino[STR_TAM_MAX];
 	bool fechado; // false se o avião não está pronto, true caso contrário
-	struct tVoo *prox;
 	int pos; // refere-se à lista de paletes
 	Palete *paletes[MAX_PAL_VOO];
 };
@@ -30,9 +29,8 @@ Voo *criar_voo(int num, Data *data, char origem[], char destino[]) {
 	voo->data = data;
 	strcpy(voo->origem, origem);
 	strcpy(voo->destino, destino);
+	voo->pos = -1;
 	voo->fechado = false;
-	voo->prox = NULL;
-	
 	return voo;
 }
 
