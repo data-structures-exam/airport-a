@@ -1,80 +1,69 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main (){
-	int opcao,aux;
-do{
-	
-printf("-----------------Menu---------------\n");
-printf("\t[1]-Inserir Bagagem\n");
-printf("\t[2]-Inserir Data\n");
-printf("\t[3]-Inserir Voo\n");
-printf("\t[4]-Inserir Pilha\n");
-printf("\t[5]-Inserir Paleta\n");
-printf("\t[6]-Inserir Pista\n");
-printf("\t[7]-Imprimir\n");
-printf("\t[8]-Remover");
-printf("\t[0]-Sair\n");
-printf("------------------------------------\n");
-printf("selecione sua opcao:\n");
-scanf("%d\n",opcao);
+#include "utils.h"
+#include "voo.h" 
+#include "pista.h"
+#include "lista_voo.h"
 
-switch (opcao)
-{
-
- case 1:
- 	int voo;
- 	char passageiro;
- 	float peso;
- 	
- 	printf("Digite o nome do passageiro:\n");
- 	scanf("%c",&passageiro);
- 	printf("Digite o numero de voo:\n");
- 	scanf("%d",&voo);
- 	printf("Digite o peso da mala:\n");
- 	scanf("%f",&peso);
- 	
-  break;
- 		case 2:
- 			
- 		int d,m,a; //dia,mes,ano
- 	    printf("Digite o dia:\n");
- 		scanf("%d",&dia);
- 		printf("Digite o mes:\n");
- 		scanf("%d",&mes);
- 		printf("Digite o ano:\n");
- 		scanf("%d",&a);
-		 		
- 		break;
- 			case 3:
- 				
- 			break;
- 				case 4;
- 				break;
- 					case 5:
- 						
- 					break;
- 						case 6:
- 							int p //pista 
- 							printf("Digite o numero da pista:\n");
- 							scanf("%d",&pista);
- 						break;
- 							case 7:
- 							
- 							break;
-								case 8:
-								break;	
-									case 0:
-									break;
-  									
-default:
-  if(opcao!=0)
-  {
-  	printf("opcao invalida\n");
-  }				
-}
-}while(opcao=0);
-  
-  return 0;  
+void imprimir_menu_principal() {
+	printf ("1 - Criar voo\n");
+	printf ("2 - Despachar bagagem\n");
+	printf ("3 - Carregar bagagem\n");
+	printf ("4 - Consulta de malas\n");
+	printf ("5 - Preparar descolagem\n");
+	printf ("6 - Levantar voo\n");
+	printf ("7 - Aterrar\n");
+	printf ("8 - Consultar voos\n");
+	printf ("9 - Verificar bagagem no voo\n");
+	printf ("10 - Destruir a simulação\n");
+	printf ("0 - Sair\n");
 }
 
+int obter_opcao() {
+	int opcao; 
+	printf ("Escolha [0-10]: ");
+	scanf("%d", &opcao);
+	if (opcao < 0 || opcao > 10) {
+		printf ("Erro: escolha inválida\n");
+		obter_opcao();
+	}
+
+	return opcao;
+}
+
+void opcao_criar_voo(Lista_Voo *lista_voo) {
+	int num_voo, dia, mes, ano;
+	char origem[STR_TAM_MAX], destino[STR_TAM_MAX];
+	printf ("Número de voo: ");
+	scanf("%d", &num_voo);
+	printf ("Data do voo [formato DD/MM/AAAA]: ");
+	scanf ("%d/%d/%d", dia, mes, ano);
+	printf ("Origem: ");
+	ler_linha(origem, STR_TAM_MAX);
+	printf ("Destino: ");
+	ler_linha(destino, STR_TAM_MAX);
+	Data *data = criar_data(dia, mes, ano);
+
+	adicionar_voo(criar_voo(num_voo, data, origem, destino));
+}
+
+int main () {
+	Pista *p1, *p2, *p3, *p4;
+	Lista_Voo *lista_voo = criar_lista_voo();
+	p1 = criar_pista(1);
+	p2 = criar_pista(2);
+	p3 = criar_pista(3);
+	p4 = criar_pista(4);
+
+	int opcao;
+	do {
+		imprimir_menu_principal();
+		opcao = obter_opcao();
+	} while (opcao != 0);
+
+	if (opcao == 1)
+		opcao_criar_voo(lista_voo);
+
+	return 0;
+}
