@@ -62,7 +62,9 @@ int lista_vazia(Lista_Voo *L){
 void destruir_lista_voo(Lista_Voo *L){
     while(!lista_vazia(L)){
         destruir_voo(L->voo);
-        L = L->prox;
         free(L);
+	Lista_Voo *aux = L->prox;
+	L = aux;
+	if (aux) aux = aux->prox;
     }
 }
