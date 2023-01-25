@@ -31,7 +31,7 @@ Voo *verificar_voo_numero(Lista_Voo *L, int num_voo){
 }
 void remover_voo(Lista_Voo **L, int num_voo){
     if(!L){
-        printf("Erro: Lista de voos inexestintes\n");
+        printf("Erro: Lista de voos inexistente\n");
         return;
     }
     Lista_Voo *aux;
