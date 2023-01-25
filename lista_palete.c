@@ -31,6 +31,22 @@ bool verificar_palete_numvoo(Lista_Palete *L, int num_voo){
     while(aux->p->num_voo != num_voo && aux)aux = aux->prox;
     return aux != NULL;
 }
+
+int num_paletes_voo(Lista_Palete *L, int num_voo) {
+	if (!L) {
+		printf ("Erro: lista inexistente/nula\n");
+		return 0;
+	}
+
+	int num = 0;
+	Lista_Palete *aux = L;
+	while (aux) {
+		if (aux->p->num_voo == num_voo) num++;
+		aux = aux->prox;
+	}
+	return num;
+}
+	
 // remove a primeira palete com o numero de voo passado
 void remover_palete(Lista_Palete **L, int num_voo){
     if(!L){
