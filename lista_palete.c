@@ -14,7 +14,7 @@ Lista_Palete *criar_lista_palete(){
 
 void adicionar_palete(Lista_Palete **L, Palete *p){
     if(!L){
-        printf("Erro: Lista de paletes inexestintes\n");
+        printf("Erro: Lista de paletes inexistentes\n");
         return;
     }
     Lista_Palete *l = (Lista_Palete *)malloc(sizeof(Lista_Palete));
