@@ -55,6 +55,11 @@ void carregar_palete(Voo *voo, Palete *p) {
 		return;
 	}
 
+	if (palete_vazia(p)) {
+		printf("Erro: palete vazia\n");
+		return;
+	}
+
 	voo->paletes[++voo->pos] = p;
 }	
 
