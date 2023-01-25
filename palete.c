@@ -23,7 +23,7 @@ Palete *criar_palete(int num_voo){
     return novo;
 }
 
-void inserir_bagagens(Palete *p, Pilha_Bagagem *pilha_bagagens){
+void inserir_pilha_bagagens(Palete *p, Pilha_Bagagem *pilha_bagagens){
 	if (!p) {
 		printf ("Erro: palete inválida/nula\n");
 		return;
@@ -59,7 +59,7 @@ void inserir_bagagem(Palete *p, Bagagem *bag) {
 	}
 
 	if (pilha_cheia(p->pilha_bagagens[p->top])) 
-		inserir_bagagens(p, criar_pilha_bagagem(p->num_voo));
+		inserir_pilha_bagagens(p, criar_pilha_bagagem(p->num_voo));
 		
 	empilhar_bagagem(p->pilha_bagagens[p->pos], bag);		
 }
