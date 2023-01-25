@@ -2,6 +2,8 @@
 #include "palete.c"
 #include <stdbool.h>
 #include "lista_palete.h"
+#include "bagagem.h"
+#include "voo.h" // para obter o número máximo de paletes por voo
 
 struct tListaPalete{
     Palete *p;
@@ -30,6 +32,44 @@ bool verificar_palete_numvoo(Lista_Palete *L, int num_voo){
     Lista_Palete *aux = L;
     while(aux->p->num_voo != num_voo && aux)aux = aux->prox;
     return aux != NULL;
+}
+
+Lista_Palete *buscar_palete(Lista_Palete *L, int num_voo) { // retorna a primeira ocorrência
+	Lista_Palete *aux = *L;
+	while (aux) {
+		if (aux->p->num_voo == num_voo) break;
+		aux = aux->prox;
+	}
+	return aux;
+}
+
+void inserir_bagagem_palete(Lista_Palete *L, Bagagem *bag) {
+	if (!L) {
+		printf ("Erro: lista de paletes inexistente/nula\n");
+		return;
+	}
+
+	if (!bag) {
+		printf ("Erro: bagagem inexistente/nula\n");
+		return;
+	}
+
+	Lista_Palete *lp = buscar_palete(L, bag->num_voo);
+	
+	if (num_paletes_voo(lista_palete, bag->num_voo) >= MAX_PAL_VOO && 
+			palete_cheia(lp->p)) {
+		printf ("Erro: paletes do voo %d estão cheias\n", bag->num_voo);
+		return;
+	}
+
+	if (!lp || palete_cheia(lp->p)) {
+		Palete *novo = criar_palete(bag->num_voo);
+		inserir_bagagem(novo, bag);
+		adicionar_palete(L, novo);
+		return;
+	}
+
+	inserir_bagagem(lp->p, bag);
 }
 
 int num_paletes_voo(Lista_Palete *L, int num_voo) {
