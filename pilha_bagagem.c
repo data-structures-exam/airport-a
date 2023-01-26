@@ -1,14 +1,5 @@
 
 #include "pilha_bagagem.h"
-#include <stdio.h>
-#include <stdlib.h>
-
-#define MAX_BAGS_PILHA 3 // número máximo de bagagens por pilha
-
-struct tPilha_Bagagem {
-	Bagagem *bagagens[MAX_BAGS_PILHA];
-	int num_voo, topo;
-};
 
 Pilha_Bagagem *criar_pilha_bagagem(int num_voo) {
 	Pilha_Bagagem *pilha = (Pilha_Bagagem *)malloc(sizeof(Pilha_Bagagem));
@@ -61,7 +52,7 @@ void desempilhar_bagagem(Pilha_Bagagem *pilha) {
 int pilha_vazia(Pilha_Bagagem *pilha) {
 	if (!pilha) {
 		printf ("Erro: pilha de bagagens inválida/nula\n");
-		return;
+		return 0;
 	}
 
 	return pilha->topo < 0;
@@ -81,7 +72,7 @@ void destruir_pilha_bagagem(Pilha_Bagagem *pilha) {
 int pilha_cheia(Pilha_Bagagem *pilha) {
 	if (!pilha) {
 		printf ("Erro: pilha de bagagens inválida/nula\n");
-		return;
+		return 0;
 	}
 
 	return pilha->topo >= MAX_BAGS_PILHA - 1;

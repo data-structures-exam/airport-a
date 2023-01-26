@@ -1,15 +1,4 @@
 #include "pista.h"
-#include "voo.h"
-#include "bagagem.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include "lista_voo.h"
-
-
-struct tPista {
-	int num;
-	Lista_Voo *ini, *fim;
-};
 
 Pista *criar_pista(int num) {
 	Pista *pista = (Pista *)malloc(sizeof(Pista));
@@ -23,7 +12,7 @@ Pista *criar_pista(int num) {
 	return pista;
 }
 
-void enfileirar_voo(Pista *pista, Lista_Voo *voo) {
+void enfileirar_voo(Pista *pista, Voo *voo) {
 	if (!pista) {
 		printf ("Erro: pista inválida/nula\n");
 		return;
@@ -35,12 +24,12 @@ void enfileirar_voo(Pista *pista, Lista_Voo *voo) {
 	}
 
 	if (!pista->ini) {
-		pista->ini = pista->fim = voo;
+		pista->ini->voo = pista->fim->voo = voo;
 		return;
 	}
 
-	pista->fim->prox = voo;
-	pista->fim = voo;
+	pista->fim->prox->voo = voo;
+	pista->fim->voo = voo;
 }
 
 void desenfileirar_voo(Pista *pista) {
@@ -51,7 +40,7 @@ void desenfileirar_voo(Pista *pista) {
 
 	if (!pista->ini) return;
 	
-	Voo *aux = pista->ini;
+	Voo *aux = pista->ini->voo;
 	pista->ini = pista->ini->prox;
 	destruir_voo(aux);
 	if (!pista->ini) pista->fim = NULL;
@@ -62,10 +51,10 @@ void destruir_pista(Pista *pista) {
 		printf ("Erro: pista inválida/nula\n");
 		return;
 	}
-	Pista *aux = pista->ini->prox;
+	Pista *aux = pista;
 	while(pista->ini) {
-		destruir_voo(pista->ini);
-		pista->ini = aux;
-		aux = aux->ini->prox;
+		destruir_voo(pista->ini->voo);
+		pista->ini = aux->ini;
+		aux->ini = aux->ini->prox;
 	}
 }

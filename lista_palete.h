@@ -2,6 +2,18 @@
 #define LISTA_PALETE_H
 
 #include <stdbool.h>
+#include <stdio.h>
+#include "palete.h"
+#include "stdlib.h"
+#include <stdbool.h>
+#include "lista_palete.h"
+#include "bagagem.h"
+#include "voo.h" // para obter o número máximo de paletes por voo
+
+struct tListaPalete{
+    Palete *p;
+    struct tListaPalete *prox;
+};
 typedef struct tListaPalete Lista_Palete;
 
 Lista_Palete *criar_lista_palete();

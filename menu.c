@@ -8,6 +8,16 @@
 #include "lista_voo.h"
 #include "lista_palete.h"
 
+void imprimir_menu_principal();
+int obter_opcao();
+Voo *obter_voo();
+void opcao_criar_voo(Lista_Voo *lista_voo);
+void opcao_despachar_bagagem(Lista_Palete *paletes, Lista_Voo *voos);
+void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos);
+void opcao_despachar_bagagem_manual(Lista_Palete *paletes, Lista_Voo *voos);
+Bagagem *obter_bagagem(Lista_Voo *voos);
+void opcao_aterrar(Pista *p3, Pista *p4);
+
 void imprimir_menu_principal() {
 	printf ("1 - Criar voo\n");
 	printf ("2 - Despachar bagagem\n");
@@ -42,7 +52,7 @@ Voo *obter_voo() {
 	printf ("Número de voo: ");
 	scanf("%d", &num_voo);
 	printf ("Data do voo [formato DD/MM/AAAA]: ");
-	scanf ("%d/%d/%d", dia, mes, ano);
+	scanf ("%d/%d/%d", &dia, &mes, &ano);
 	printf ("Origem: ");
 	ler_linha(origem, STR_TAM_MAX);
 	printf ("Destino: ");
@@ -55,7 +65,7 @@ Voo *obter_voo() {
 
 void opcao_criar_voo(Lista_Voo *lista_voo) {
 	Voo *voo = obter_voo();
-	adicionar_voo(lista_voo, voo);
+	adicionar_voo_lista(&lista_voo, voo);
 }
 
 // opcao despachar bagagem-----------
@@ -109,6 +119,7 @@ Bagagem *obter_bagagem(Lista_Voo *voos) {
 	} while (peso_kg <= 0.0 || peso_kg >= 32.0);
 
 	Bagagem *bag = criar_bagagem(nome_passageiro, num_voo, peso_kg);
+	return bag;
 }
 
 
@@ -128,10 +139,9 @@ void opcao_aterrar(Pista *p3, Pista *p4) {
 	} while (opcao != 1 || opcao != 2);
 
 	Voo *voo = obter_voo();
-	adicionar_voo(voo_no, voo);
-
-	if (opcao == 1) enfileirar_voo(p3, voo_no);
-	else if (opcao == 2) enfileirar_voo(p4, voo_no);
+	adicionar_voo_lista(&voo_no, voo);
+	if (opcao == 1) enfileirar_voo(p3, voo);
+	else if (opcao == 2) enfileirar_voo(p4, voo);
 }
 
 int main () {
@@ -151,8 +161,8 @@ int main () {
 
 	if (opcao == 1)
 		opcao_criar_voo(lista_voo);
-	else if (opcao == 2)
-		opcao_despachar_bagagem(lista_palete);
+	else if (opcao == 2);
+		//opcao_despachar_bagagem(lista_palete);
 	else if (opcao == 7)
 		opcao_aterrar(p3, p4);
 

@@ -1,22 +1,4 @@
 #include "voo.h"
-#include "data.h"
-#include "palete.c"
-#include "utils.h"
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
-#define MAX_PAL_VOO 5 // número máximo de paletes por voo
-
-struct tVoo {
-	int num;
-	Data *data;
-	char origem[STR_TAM_MAX], destino[STR_TAM_MAX];
-	bool fechado; // false se o avião não está pronto, true caso contrário
-	int pos; // refere-se à lista de paletes
-	Palete *paletes[MAX_PAL_VOO];
-};
 
 Voo *criar_voo(int num, Data *data, char origem[], char destino[]) {
 	Voo *voo = (Voo *)malloc(sizeof(Voo));
@@ -66,7 +48,7 @@ void carregar_palete(Voo *voo, Palete *p) {
 bool porao_cheio(Voo *voo) {
 	if (!voo) {
 		printf ("Erro: voo inválido/nulo\n");
-		return;
+		return 0;
 	}
 
 	return voo->pos >= MAX_PAL_VOO - 1;
@@ -75,7 +57,7 @@ bool porao_cheio(Voo *voo) {
 bool porao_vazio(Voo *voo) {
 	if (!voo) {
 		printf ("Erro: voo inválido/nulo\n");
-		return;
+		return 0;
 	}
 
 	return voo->pos == -1;
@@ -102,7 +84,7 @@ void fechar_voo(Voo *voo) {
 bool voo_fechado(Voo *voo) {
 	if (!voo) {
 		printf ("Erro: voo inválido/nulo\n");
-		return;
+		return 0;
 	}
 	return voo->fechado;
 }

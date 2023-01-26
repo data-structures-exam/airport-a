@@ -2,6 +2,16 @@
 #define PILHA_BAGAGEM_H
 
 #include "bagagem.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_BAGS_PILHA 3 // número máximo de bagagens por pilha
+
+struct tPilha_Bagagem {
+	Bagagem *bagagens[MAX_BAGS_PILHA];
+	int num_voo, topo;
+};
+
 
 typedef struct tPilha_Bagagem Pilha_Bagagem;
 
