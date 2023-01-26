@@ -13,7 +13,7 @@
 
 #define MAX_PAL_VOO 5 // número máximo de paletes por voo
 
-struct tVoo {
+struct  tVoo {
 	int num;
 	Data *data;
 	char origem[STR_TAM_MAX], destino[STR_TAM_MAX];
