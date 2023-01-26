@@ -36,7 +36,7 @@ int obter_opcao() {
 
 // opcao criar voo-----------
 
-void opcao_criar_voo(Lista_Voo *lista_voo) {
+Voo *obter_voo() {
 	int num_voo, dia, mes, ano;
 	char origem[STR_TAM_MAX], destino[STR_TAM_MAX];
 	printf ("Número de voo: ");
@@ -48,8 +48,14 @@ void opcao_criar_voo(Lista_Voo *lista_voo) {
 	printf ("Destino: ");
 	ler_linha(destino, STR_TAM_MAX);
 	Data *data = criar_data(dia, mes, ano);
+	Voo *voo = criar_voo(num_voo, data, origem, destino);
 
-	adicionar_voo(lista_voo, criar_voo(num_voo, data, origem, destino));
+	return voo;
+}
+
+void opcao_criar_voo(Lista_Voo *lista_voo) {
+	Voo *voo = obter_voo();
+	adicionar_voo(lista_voo, voo);
 }
 
 // opcao despachar bagagem-----------
@@ -125,7 +131,6 @@ void opcao_aterrar(Pista *p3, Pista *p4) {
 	if (opcao == 1) opcao_criar_voo(p3->fim, voo_no);
 	else if (opcao == 2) opcao_criar_voo(p4->fim, voo_no);
 
-	
 }
 
 int main () {
