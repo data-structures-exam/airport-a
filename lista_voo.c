@@ -11,10 +11,6 @@ Lista_Voo *criar_lista_voo(){
 }
 
 void adicionar_voo(Lista_Voo **L, Voo *voo){
-    if(!L){
-        printf("Erro: Lista de voo inexistente\n");
-        return;
-    }
     Lista_Voo *l = (Lista_Voo *)malloc(sizeof(Lista_Voo));
     if(!l){
         printf("Erro: malloc falhou em 'adicionar_voo'\n");
