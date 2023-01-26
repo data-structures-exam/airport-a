@@ -43,6 +43,20 @@ void imprimir_voos(Lista_Voo *L) {
 	}
 }
 
+Lista_Voo *buscar_voo(Lista_Voo *L, int i) { // buscar i-ésimo voo da lista
+}
+
+int count_voos(Lista_Voo *L) {
+	int count = 0;
+	Lista_Voo *aux = L;
+	while (aux) {
+		count++;
+		aux = aux->prox;
+	}
+
+	return count;
+}
+
 Voo *verificar_voo_numero(Lista_Voo *L, int num_voo){
     Lista_Voo *aux = L;
     while(aux->voo->num != num_voo && aux)aux = aux->prox;
