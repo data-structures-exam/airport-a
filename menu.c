@@ -49,7 +49,7 @@ void opcao_criar_voo(Lista_Voo *lista_voo) {
 	ler_linha(destino, STR_TAM_MAX);
 	Data *data = criar_data(dia, mes, ano);
 
-	adicionar_voo(criar_voo(num_voo, data, origem, destino));
+	adicionar_voo(lista_voo, criar_voo(num_voo, data, origem, destino));
 }
 
 // opcao despachar bagagem-----------
@@ -106,15 +106,26 @@ Bagagem *obter_bagagem(Lista_Voo *voos) {
 }
 
 
-
-
-
 // opcao aterrar------------
 
 void opcao_aterrar(Pista *p3, Pista *p4) {
-	// criar um voo
-	// perguntar ao usuário em qual das pistas o avião deve aterrar
-	// adicionar o voo a pista correspondente (enfileirar voo)
+	Lista_Voo *voo_no = criar_lista_voo();
+	int opcao;
+	do {
+		printf ("Selecione a pista onde deseja que o avião aterre\n");
+		printf ("1 - Pista 3\n");
+		printf ("2 - Pista 4\n");
+		printf ("Escolha [1-2]: ");
+		scanf ("%d", &opcao);
+		if (opcao != 1 || opcao != 2)
+			printf ("Erro: escolha inválida\n");
+	} while (opcao != 1 || opcao != 2);
+
+	// this won't work
+	if (opcao == 1) opcao_criar_voo(p3->fim, voo_no);
+	else if (opcao == 2) opcao_criar_voo(p4->fim, voo_no);
+
+	
 }
 
 int main () {
