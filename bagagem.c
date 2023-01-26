@@ -12,7 +12,7 @@ Bagagem *criar_bagagem(char nome_passageiro[], int num_voo, float peso_kg) {
 		bag->peso_kg = peso_kg;
 	else {
 		printf ("Erro: peso da bagagem inválido\n");
-		return NULL;
+	return NULL;
 	}
 
 	return bag;
