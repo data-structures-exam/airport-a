@@ -44,6 +44,12 @@ void imprimir_voos(Lista_Voo *L) {
 }
 
 Lista_Voo *buscar_voo(Lista_Voo *L, int i) { // buscar i-ésimo voo da lista
+	if (i > count_voos(L) || i <= 0 || lista_vazia(L)) return NULL;
+	
+	Lista_Voo *aux = L;
+	for (int j = 1; j < i; ++j)
+		aux = aux->prox;
+	return aux;
 }
 
 int count_voos(Lista_Voo *L) {
