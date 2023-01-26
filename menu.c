@@ -4,6 +4,7 @@
 #include "utils.h"
 #include "voo.h" 
 #include "pista.h"
+#include "bagagem.h"
 #include "lista_voo.h"
 #include "lista_palete.h"
 
@@ -54,9 +55,59 @@ void opcao_criar_voo(Lista_Voo *lista_voo) {
 // opcao despachar bagagem-----------
 
 void opcao_despachar_bagagem(Lista_Palete *paletes, Lista_Voo *voos) {
-	// TODO: separar em despachar_bagagem_auto/manual
-	// usar a função inserir_bagagem_palete de lista_palete.h
+	int opcao;
+	do {
+		printf ("1 - Automático\n");
+		printf ("2 - Manual\n");
+		printf ("Escolha [1-2]: ");
+		scanf ("%d", &opcao);
+		if (opcao != 1 || opcao != 2)
+			printf ("Erro: escolha inválida\n");
+	} while (opcao != 1 || opcao != 2);
+
+	if (opcao == 1)
+		opcao_despachar_bagagem_auto(paletes, voos);
+	else if (opcao == 2)
+		opcao_despachar_bagagem_manual(paletes, voos);
 }
+
+void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos) {
+
+}
+
+void opcao_despachar_bagagem_manual(Lista_Palete *paletes, Lista_Voo *voos) {
+	Bagagem *bag = obter_bagagem(voos);
+	inserir_bagagem_palete(paletes, bag);
+}
+
+Bagagem *obter_bagagem(Lista_Voo *voos) {
+	char nome_passageiro[STR_TAM_MAX];
+	int num_voo; float peso_kg;
+	printf("Nome do(a) passageiro(a): ");
+	ler_linha(nome_passageiro, STR_TAM_MAX);
+	imprimir_voos(voos);
+	int opcao, qtd_voos = count_voos(voos);
+	do {
+		printf ("Selecione o voo [1-%d]: ", qtd_voos);
+		scanf ("%d", &opcao);
+		if (opcao < 1 || opcao > qtd_voos) 
+			printf ("Erro: opção inválida\n");
+	} while (opcao < 1 || opcao > qtd_voos);
+	Lista_Voo *voo = buscar_voo(voos, opcao);
+	num_voo = voo->voo->num;
+	do {
+		printf ("Peso da bagagem em kg [até 32 kg]: ");
+		scanf ("%f", &peso_kg);
+		if (peso_kg <= 0.0 || peso_kg >= 32.0)
+			printf ("Erro: peso inválido\n");
+	} while (peso_kg <= 0.0 || peso_kg >= 32.0);
+
+	Bagagem *bag = criar_bagagem(nome_passageiro, num_voo, peso_kg);
+}
+
+
+
+
 
 // opcao aterrar------------
 
