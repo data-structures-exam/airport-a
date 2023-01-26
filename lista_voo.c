@@ -24,6 +24,25 @@ void adicionar_voo(Lista_Voo **L, Voo *voo){
     l->prox = *L;
     *L = l;
 }
+
+void imprimir_voos(Lista_Voo *L) {
+	if (lista_vazia(L)) {
+		printf ("Lista vazia\n");
+		return;
+	}
+
+	Lista_Voo *aux = L;
+	int i = 1;
+	while (aux) {
+		printf ("%d - Voo %d\n", i, l->voo->num);
+		printf ("\tData: %d/%d/%d\n", l->voo->data->dia, l->voo->data->mes, l->voo->data->ano);
+		printf ("\t%s -> %s\n\n", l->voo->origem, l->voo->destino);
+
+		aux = aux->prox;
+		i++;
+	}
+}
+
 Voo *verificar_voo_numero(Lista_Voo *L, int num_voo){
     Lista_Voo *aux = L;
     while(aux->voo->num != num_voo && aux)aux = aux->prox;

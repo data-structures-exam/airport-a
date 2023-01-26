@@ -12,6 +12,7 @@ typedef struct tListaVoo Lista_Voo;
 Lista_Voo *criar_lista_voo();
 void remover_voo(Lista_Voo **L, int num_voo);
 int verificar_voo(Lista_Voo *L, int num_voo);
+void imprimir_voos(Lista_Voo *L);
 int lista_vazia(Lista_Voo *L);
 void destruir_lista_voo(Lista_Voo *L);
 void adicionar_voo_lista(Lista_Voo **L, Voo *v);
