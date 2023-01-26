@@ -127,10 +127,11 @@ void opcao_aterrar(Pista *p3, Pista *p4) {
 			printf ("Erro: escolha inválida\n");
 	} while (opcao != 1 || opcao != 2);
 
-	// this won't work
-	if (opcao == 1) opcao_criar_voo(p3->fim, voo_no);
-	else if (opcao == 2) opcao_criar_voo(p4->fim, voo_no);
+	Voo *voo = obter_voo();
+	adicionar_voo(voo_no, voo);
 
+	if (opcao == 1) enfileirar_voo(p3, voo_no);
+	else if (opcao == 2) enfileirar_voo(p4, voo_no);
 }
 
 int main () {
