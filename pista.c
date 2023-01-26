@@ -3,7 +3,7 @@
 #include "bagagem.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "lista_voo.c"
+#include "lista_voo.h"
 
 
 struct tPista {
@@ -23,7 +23,7 @@ Pista *criar_pista(int num) {
 	return pista;
 }
 
-void enfileirar_voo(Pista *pista, Voo *voo) {
+void enfileirar_voo(Pista *pista, Lista_Voo *voo) {
 	if (!pista) {
 		printf ("Erro: pista inválida/nula\n");
 		return;
