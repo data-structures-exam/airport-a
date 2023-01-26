@@ -8,7 +8,7 @@ void adicionar_voo_lista(Lista_Voo **L, Voo *voo){
     Lista_Voo *l = (Lista_Voo *)malloc(sizeof(Lista_Voo));
     if(!l){
         printf("Erro: malloc falhou em 'adicionar_voo'\n");
-        return;
+     return;
     }
     l->voo = voo;
     l->prox = *L;
