@@ -1,4 +1,4 @@
-#include "voo.h"
+ #include "voo.h"
 
 Voo *criar_voo(int num, Data *data, char origem[], char destino[]) {
 	Voo *voo = (Voo *)malloc(sizeof(Voo));
