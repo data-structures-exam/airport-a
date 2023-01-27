@@ -34,12 +34,12 @@ void imprimir_menu_principal() {
 
 int obter_opcao() {
 	int opcao; 
-	printf ("Escolha [0-10]: ");
-	scanf("%d", &opcao);
-	if (opcao < 0 || opcao > 10) {
-		printf ("Erro: escolha inválida\n");
-		obter_opcao();
-	}
+	do {
+		printf ("Escolha [0-10]: ");
+		scanf("%d", &opcao);
+		if (opcao < 0 || opcao > 10)
+			printf ("Erro: escolha inválida\n");
+	} while (opcao < 0 || opcao > 10);
 
 	return opcao;
 }
@@ -153,18 +153,19 @@ int main () {
 	p3 = criar_pista(3);
 	p4 = criar_pista(4);
 
-	int opcao;
+	int opcao = -1;
 	do {
-		imprimir_menu_principal();
-		opcao = obter_opcao();
-	} while (opcao < 0 || opcao > 10);
+		do {
+			imprimir_menu_principal();
+			opcao = obter_opcao();
+		} while (opcao < 0 || opcao > 10);
 
-	if (opcao == 1) 
-		opcao_criar_voo(lista_voo);
-	else if (opcao == 2)
-		opcao_despachar_bagagem(lista_palete, lista_voo);
-	else if (opcao == 7)
-		opcao_aterrar(p3, p4);
-
+		if (opcao == 1) 
+			opcao_criar_voo(lista_voo);
+		else if (opcao == 2)
+			opcao_despachar_bagagem(lista_palete, lista_voo);
+		else if (opcao == 7)
+			opcao_aterrar(p3, p4);
+	} while (opcao != 0);
 	return 0;
 }
