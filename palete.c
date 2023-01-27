@@ -49,6 +49,7 @@ void inserir_bagagem(Palete *p, Bagagem *bag) {
 
 	if (palete_cheia(p)) {
 		printf ("Erro: palete cheia\n");
+		destruir_bagagem(bag);
 		return;
 	}
 
