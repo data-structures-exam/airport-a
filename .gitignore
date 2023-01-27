@@ -1,4 +1,4 @@
 *.o
 
 # ignorar executável
-main
+menu
