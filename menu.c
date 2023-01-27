@@ -53,6 +53,7 @@ Voo *obter_voo() {
 	scanf("%d", &num_voo);
 	printf ("Data do voo [formato DD/MM/AAAA]: ");
 	scanf ("%d/%d/%d", &dia, &mes, &ano);
+	getchar(); // remover o '\n' do buffer
 	printf ("Origem: ");
 	ler_linha(origem, STR_TAM_MAX);
 	printf ("Destino: ");
