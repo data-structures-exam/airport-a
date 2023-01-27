@@ -12,7 +12,7 @@ Pista *criar_pista(int num) {
 	return pista;
 }
 
-void enfileirar_voo(Pista *pista, Voo *voo) {
+void enfileirar_voo(Pista *pista, Lista_Voo *voo) {
 	if (!pista) {
 		printf ("Erro: pista inválida/nula\n");
 		return;
@@ -24,12 +24,12 @@ void enfileirar_voo(Pista *pista, Voo *voo) {
 	}
 
 	if (!pista->ini) {
-		pista->ini->voo = pista->fim->voo = voo;
+		pista->ini = pista->fim = voo;
 		return;
 	}
 
-	pista->fim->prox->voo = voo;
-	pista->fim->voo = voo;
+	pista->fim->prox = voo;
+	pista->fim = voo;
 }
 
 void desenfileirar_voo(Pista *pista) {
