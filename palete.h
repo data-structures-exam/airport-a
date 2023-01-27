@@ -5,6 +5,13 @@
 #include "bagagem.h"
 #include <stdbool.h>
 
+#define NUM_MAX_PILHA 3 // número máximo de pilhas de bagagens por palete
+struct tPalete{
+  int num_voo, pos;
+  Pilha_Bagagem *pilha_bagagens[NUM_MAX_PILHA];
+};
+
+
 typedef struct tPalete Palete;
 
 Palete *criar_palete(int num_voo);
