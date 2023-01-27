@@ -161,8 +161,8 @@ int main () {
 
 	if (opcao == 1)
 		opcao_criar_voo(lista_voo);
-	else if (opcao == 2);
-		//opcao_despachar_bagagem(lista_palete);
+	else if (opcao == 2)
+		opcao_despachar_bagagem(lista_palete, lista_voo);
 	else if (opcao == 7)
 		opcao_aterrar(p3, p4);
 

@@ -1,5 +1,5 @@
 #include "palete.h"
-#include "pilha_bagagem.c"
+#include "pilha_bagagem.h"
 #include "bagagem.h"
 #include <stdio.h>
 #include <stdlib.h>

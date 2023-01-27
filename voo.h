@@ -4,7 +4,7 @@
 #include "data.h"
 #include <stdbool.h>
 #include "data.h"
-#include "palete.c"
+#include "palete.h"
 #include "utils.h"
 #include <string.h>
 #include <stdio.h>
