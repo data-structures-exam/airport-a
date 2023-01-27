@@ -37,7 +37,7 @@ void inserir_bagagem_palete(Lista_Palete *L, Bagagem *bag) {
 
 	Lista_Palete *lp = buscar_palete(L, bag->num_voo);
 	
-	if (num_paletes_voo(lp, bag->num_voo) >= MAX_PAL_VOO && 
+	if (lp && num_paletes_voo(lp, bag->num_voo) >= MAX_PAL_VOO && 
 			palete_cheia(lp->p)) {
 		printf ("Erro: paletes do voo %d estão cheias\n", bag->num_voo);
 		destruir_bagagem(bag);

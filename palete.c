@@ -14,6 +14,8 @@ Palete *criar_palete(int num_voo){
     }
     novo->pos = -1;
     novo->num_voo = num_voo;
+    for(int i = 0; i < NUM_MAX_PILHA; i++)
+	    novo->pilha_bagagens[i] = NULL;
     return novo;
 }
 
@@ -53,7 +55,7 @@ void inserir_bagagem(Palete *p, Bagagem *bag) {
 		return;
 	}
 
-	if (pilha_cheia(p->pilha_bagagens[p->pos])) 
+	if (p->pos > -1 && pilha_cheia(p->pilha_bagagens[p->pos])) 
 		inserir_pilha_bagagens(p, criar_pilha_bagagem(p->num_voo));
 		
 	empilhar_bagagem(p->pilha_bagagens[p->pos], bag);		

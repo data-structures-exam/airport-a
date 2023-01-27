@@ -85,8 +85,14 @@ void opcao_despachar_bagagem(Lista_Palete *paletes, Lista_Voo *voos) {
 
 	if (opcao == 1)
 		opcao_despachar_bagagem_auto(paletes, voos);
-	else if (opcao == 2)
+	else if (opcao == 2) {
+		if (lista_voo_vazia(voos)) {
+			printf ("Erro: não há voos criados. Crie um voo para poder despachar uma bagagem\n");
+			return;
+		}
+
 		opcao_despachar_bagagem_manual(paletes, voos);
+	}
 }
 
 void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos) {
