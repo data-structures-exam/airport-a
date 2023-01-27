@@ -11,7 +11,7 @@
 void imprimir_menu_principal();
 int obter_opcao();
 Voo *obter_voo();
-void opcao_criar_voo(Lista_Voo *lista_voo);
+void opcao_criar_voo(Lista_Voo **lista_voo);
 void opcao_despachar_bagagem(Lista_Palete *paletes, Lista_Voo *voos);
 void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos);
 void opcao_despachar_bagagem_manual(Lista_Palete *paletes, Lista_Voo *voos);
@@ -65,9 +65,9 @@ Voo *obter_voo() {
 	return voo;
 }
 
-void opcao_criar_voo(Lista_Voo *lista_voo) {
+void opcao_criar_voo(Lista_Voo **lista_voo) {
 	Voo *voo = obter_voo();
-	adicionar_voo_lista(&lista_voo, voo);
+	adicionar_voo_lista(lista_voo, voo);
 }
 
 // opcao despachar bagagem-----------
@@ -159,7 +159,7 @@ void opcao_consultar_voos(Lista_Voo *voos, Pista *p1, Pista *p2, Pista *p3, Pist
 	printf("Voos em espera (chegadas):\nPista 3: \n");
 	imprimir_voos(p3->ini);
 	printf("Pista 4: \n");
-	imprimir_voos(p2->ini);
+	imprimir_voos(p4->ini);
 
 }
 
@@ -179,8 +179,8 @@ int main () {
 			opcao = obter_opcao();
 		} while (opcao < 0 || opcao > 10);
 
-		if (opcao == 1) 
-			opcao_criar_voo(lista_voo);
+		if (opcao == 1)
+			opcao_criar_voo(&lista_voo);
 		else if (opcao == 2)
 			opcao_despachar_bagagem(lista_palete, lista_voo);
 		else if (opcao == 7)
