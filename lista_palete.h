@@ -6,7 +6,6 @@
 #include "palete.h"
 #include "stdlib.h"
 #include <stdbool.h>
-#include "lista_palete.h"
 #include "bagagem.h"
 #include "voo.h" // para obter o número máximo de paletes por voo
 
