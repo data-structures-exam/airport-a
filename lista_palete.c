@@ -55,11 +55,6 @@ void inserir_bagagem_palete(Lista_Palete *L, Bagagem *bag) {
 }
 
 int num_paletes_voo(Lista_Palete *L, int num_voo) {
-	if (!L) {
-		printf ("Erro: lista inexistente/nula\n");
-		return 0;
-	}
-
 	int num = 0;
 	Lista_Palete *aux = L;
 	while (aux) {
@@ -71,10 +66,6 @@ int num_paletes_voo(Lista_Palete *L, int num_voo) {
 	
 // remove a primeira palete com o numero de voo passado
 void remover_palete(Lista_Palete **L, int num_voo){
-    if(!L){
-        printf("Erro: Lista de paletes inexestintes\n");
-        return;
-    }
     Lista_Palete *aux;
     if((*L)->p->num_voo == num_voo){
         aux = *L;
