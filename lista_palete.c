@@ -5,10 +5,6 @@ Lista_Palete *criar_lista_palete(){
 }
 
 void adicionar_palete(Lista_Palete **L, Palete *p){
-    if(!L){
-        printf("Erro: Lista de paletes inexistentes\n");
-        return;
-    }
     Lista_Palete *l = (Lista_Palete *)malloc(sizeof(Lista_Palete));
     if(!l){
         printf("Erro: malloc falhou em 'adicionar_palete'\n");
@@ -34,11 +30,6 @@ Lista_Palete *buscar_palete(Lista_Palete *L, int num_voo) { // retorna a primeir
 }
 
 void inserir_bagagem_palete(Lista_Palete *L, Bagagem *bag) {
-	if (!L) {
-		printf ("Erro: lista de paletes inexistente/nula\n");
-		return;
-	}
-
 	if (!bag) {
 		printf ("Erro: bagagem inexistente/nula\n");
 		return;
