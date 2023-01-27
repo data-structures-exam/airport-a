@@ -17,6 +17,7 @@ void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos);
 void opcao_despachar_bagagem_manual(Lista_Palete *paletes, Lista_Voo *voos);
 Bagagem *obter_bagagem(Lista_Voo *voos);
 void opcao_aterrar(Pista *p3, Pista *p4);
+void opcao_consultar_voos(Lista_Voo *voos, Pista *p1, Pista *p2, Pista *p3, Pista *p4);
 
 void imprimir_menu_principal() {
 	printf ("1 - Criar voo\n");
@@ -78,9 +79,9 @@ void opcao_despachar_bagagem(Lista_Palete *paletes, Lista_Voo *voos) {
 		printf ("2 - Manual\n");
 		printf ("Escolha [1-2]: ");
 		scanf ("%d", &opcao);
-		if (opcao != 1 || opcao != 2)
+		if (opcao != 1 && opcao != 2)
 			printf ("Erro: escolha inválida\n");
-	} while (opcao != 1 || opcao != 2);
+	} while (opcao != 1 && opcao != 2);
 
 	if (opcao == 1)
 		opcao_despachar_bagagem_auto(paletes, voos);
@@ -135,14 +136,31 @@ void opcao_aterrar(Pista *p3, Pista *p4) {
 		printf ("2 - Pista 4\n");
 		printf ("Escolha [1-2]: ");
 		scanf ("%d", &opcao);
-		if (opcao != 1 || opcao != 2)
+		if (opcao != 1 && opcao != 2)
 			printf ("Erro: escolha inválida\n");
-	} while (opcao != 1 || opcao != 2);
+	} while (opcao != 1 && opcao != 2);
 
 	Voo *voo = obter_voo();
 	adicionar_voo_lista(&voo_no, voo);
-	if (opcao == 1) enfileirar_voo(p3, voo);
-	else if (opcao == 2) enfileirar_voo(p4, voo);
+	if (opcao == 1) enfileirar_voo(p3, voo_no);
+	else if (opcao == 2) enfileirar_voo(p4, voo_no);
+}
+
+// opcao consultar voos-------------
+void opcao_consultar_voos(Lista_Voo *voos, Pista *p1, Pista *p2, Pista *p3, Pista *p4) {
+	printf("Voos em preparação: \n");
+	imprimir_voos(voos);
+
+	printf("Voos em espera (partidas):\nPista 1: \n");
+	imprimir_voos(p1->ini);
+	printf("Pista 2: \n");
+	imprimir_voos(p2->ini);
+
+	printf("Voos em espera (chegadas):\nPista 3: \n");
+	imprimir_voos(p3->ini);
+	printf("Pista 4: \n");
+	imprimir_voos(p2->ini);
+
 }
 
 int main () {
@@ -167,6 +185,8 @@ int main () {
 			opcao_despachar_bagagem(lista_palete, lista_voo);
 		else if (opcao == 7)
 			opcao_aterrar(p3, p4);
+		else if (opcao == 8)
+			opcao_consultar_voos(lista_voo, p1, p2, p3, p4);
 	} while (opcao != 0);
 	return 0;
 }
