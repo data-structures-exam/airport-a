@@ -157,9 +157,9 @@ int main () {
 	do {
 		imprimir_menu_principal();
 		opcao = obter_opcao();
-	} while (opcao != 0);
+	} while (opcao < 0 || opcao > 10);
 
-	if (opcao == 1)
+	if (opcao == 1) 
 		opcao_criar_voo(lista_voo);
 	else if (opcao == 2)
 		opcao_despachar_bagagem(lista_palete, lista_voo);
