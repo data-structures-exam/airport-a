@@ -189,6 +189,21 @@ void opcao_consultar_malas(Lista_Palete *paletes, Lista_Voo *voos) {
 	}
 	
 }
+// opcao preparar descolagem
+
+void opcao_preparar_descolagem(Lista_Voo *voos, Pista *p1, Pista *p2) {
+	Lista_Voo *voo_no = criar_lista_voo();
+	int opcao;
+	do {
+		printf ("Selecione a pista para onde deseja enviar o avião\n");
+		printf ("1 - Pista 1\n");
+		printf ("2 - Pista 2\n");
+		printf ("Escolha [1-2]: ");
+		scanf ("%d", &opcao);
+		if (opcao != 1 && opcao != 2)
+			printf ("Erro: escolha inválida\n");
+	} while (opcao != 1 && opcao != 2);
+}
 
 // opcao aterrar------------
 
@@ -250,6 +265,8 @@ int main () {
 			opcao_despachar_bagagem(&lista_palete, lista_voo);
 		else if (opcao == 4)
 			opcao_consultar_malas(lista_palete, lista_voo);
+		else if (opcao == 5)
+			opcao_preparar_descolagem(lista_voo)
 		else if (opcao == 7)
 			opcao_aterrar(p3, p4);
 		else if (opcao == 8)
