@@ -13,9 +13,9 @@ void imprimir_menu_principal();
 int obter_opcao();
 Voo *obter_voo();
 void opcao_criar_voo(Lista_Voo **lista_voo);
-void opcao_despachar_bagagem(Lista_Palete *paletes, Lista_Voo *voos);
+void opcao_despachar_bagagem(Lista_Palete **paletes, Lista_Voo *voos);
 void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos);
-void opcao_despachar_bagagem_manual(Lista_Palete *paletes, Lista_Voo *voos);
+void opcao_despachar_bagagem_manual(Lista_Palete **paletes, Lista_Voo *voos);
 void opcao_consultar_malas(Lista_Palete *paletes, Lista_Voo *voos);
 Bagagem *obter_bagagem(Lista_Voo *voos);
 void opcao_aterrar(Pista *p3, Pista *p4);
@@ -73,7 +73,7 @@ void opcao_criar_voo(Lista_Voo **lista_voo) {
 
 // opcao despachar bagagem-----------
 
-void opcao_despachar_bagagem(Lista_Palete *paletes, Lista_Voo *voos) {
+void opcao_despachar_bagagem(Lista_Palete **paletes, Lista_Voo *voos) {
 	int opcao;
 	do {
 		printf ("1 - Automático\n");
@@ -85,7 +85,7 @@ void opcao_despachar_bagagem(Lista_Palete *paletes, Lista_Voo *voos) {
 	} while (opcao != 1 && opcao != 2);
 
 	if (opcao == 1)
-		opcao_despachar_bagagem_auto(paletes, voos);
+		opcao_despachar_bagagem_auto(*paletes, voos);
 	else if (opcao == 2) {
 		if (lista_voo_vazia(voos)) {
 			printf ("Erro: não há voos criados. Crie um voo para poder despachar uma bagagem\n");
@@ -126,7 +126,7 @@ void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos) {
 				printf("Voo nao econtrado\n");
 				return;
 			}
-			inserir_bagagem_palete(paletes, bag);
+			inserir_bagagem_palete(&paletes, bag);
 		}	
 		fclose(f);
 	}else{
@@ -135,7 +135,7 @@ void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos) {
 	
 }
 
-void opcao_despachar_bagagem_manual(Lista_Palete *paletes, Lista_Voo *voos) {
+void opcao_despachar_bagagem_manual(Lista_Palete **paletes, Lista_Voo *voos) {
 	Bagagem *bag = obter_bagagem(voos);
 	inserir_bagagem_palete(paletes, bag);
 }
@@ -184,6 +184,8 @@ void opcao_consultar_malas(Lista_Palete *paletes, Lista_Voo *voos) {
 			printf ("\tPalete %d: \n", i);
 			imprimir_bagagens(lp->p);
 		}
+
+		aux = aux->prox;
 	}
 	
 }
@@ -245,7 +247,7 @@ int main () {
 		if (opcao == 1)
 			opcao_criar_voo(&lista_voo);
 		else if (opcao == 2)
-			opcao_despachar_bagagem(lista_palete, lista_voo);
+			opcao_despachar_bagagem(&lista_palete, lista_voo);
 		else if (opcao == 4)
 			opcao_consultar_malas(lista_palete, lista_voo);
 		else if (opcao == 7)

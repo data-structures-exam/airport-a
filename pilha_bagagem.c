@@ -41,7 +41,7 @@ void empilhar_bagagem(Pilha_Bagagem *pilha, Bagagem *bag) {
 		printf("Erro: número de voo da pilha e da bagagem não correspondem\n");
 		return;
 	}
-	pilha->bagagens[++pilha->topo] = bag;
+	pilha->bagagens[++(pilha->topo)] = bag;
 }
 
 void desempilhar_bagagem(Pilha_Bagagem *pilha) {

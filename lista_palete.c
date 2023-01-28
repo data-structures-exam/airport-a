@@ -36,16 +36,15 @@ bool verificar_palete_numvoo(Lista_Palete *L, int num_voo){
     return aux != NULL;
 }
 
-void inserir_bagagem_palete(Lista_Palete *L, Bagagem *bag) {
+void inserir_bagagem_palete(Lista_Palete **L, Bagagem *bag) {
 	if (!bag) {
 		printf ("Erro: bagagem inexistente/nula\n");
 		return;
 	}
 
-	Lista_Palete *lp = buscar_palete(L, bag->num_voo, 1);
+	Lista_Palete *lp = buscar_palete(*L, bag->num_voo, 1);
 	
-	if (lp && num_paletes_voo(lp, bag->num_voo) >= MAX_PAL_VOO && 
-			palete_cheia(lp->p)) {
+	if (lp && num_paletes_voo(lp, bag->num_voo) >= MAX_PAL_VOO && palete_cheia(lp->p)) {
 		printf ("Erro: paletes do voo %d estão cheias\n", bag->num_voo);
 		destruir_bagagem(bag);
 		return;
@@ -54,11 +53,12 @@ void inserir_bagagem_palete(Lista_Palete *L, Bagagem *bag) {
 	if (!lp || palete_cheia(lp->p)) {
 		Palete *novo = criar_palete(bag->num_voo);
 		inserir_bagagem(novo, bag);
-		adicionar_palete(&L, novo);
+		adicionar_palete(L, novo);
 		return;
 	}
 
 	inserir_bagagem(lp->p, bag);
+	
 }
 
 int num_paletes_voo(Lista_Palete *L, int num_voo) {
@@ -105,3 +105,4 @@ void destruir_lista_palete(Lista_Palete *L){
         free(L);
     }
 }
+

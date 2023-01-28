@@ -50,7 +50,7 @@ void inserir_pilha_bagagens(Palete *p, Pilha_Bagagem *pilha_bagagens){
 		return;
 	}
 
-	p->pilha_bagagens[++p->pos] = pilha_bagagens;		
+	p->pilha_bagagens[++(p->pos)] = pilha_bagagens;		
 }
 
 void inserir_bagagem(Palete *p, Bagagem *bag) {
@@ -65,13 +65,10 @@ void inserir_bagagem(Palete *p, Bagagem *bag) {
 		return;
 	}
 
-	if (palete_vazia(p)) {
+	if (palete_vazia(p) || pilha_cheia(p->pilha_bagagens[p->pos])) {
 		Pilha_Bagagem *novo = criar_pilha_bagagem(p->num_voo);
 		inserir_pilha_bagagens(p, novo);
 	}
-
-	if (pilha_cheia(p->pilha_bagagens[p->pos])) 
-		inserir_pilha_bagagens(p, criar_pilha_bagagem(p->num_voo));
 		
 	empilhar_bagagem(p->pilha_bagagens[p->pos], bag);		
 }
