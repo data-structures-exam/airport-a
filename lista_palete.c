@@ -99,10 +99,18 @@ bool lista_vazia(Lista_Palete *L){
 }
 
 void destruir_lista_palete(Lista_Palete *L){
-    while(!lista_vazia(L)){
-        destruir_palete(L->p);
-        L = L->prox;
-        free(L);
+    if(!L){
+        printf("Erro: lista paletes vazia\n");
+        return;
+    }
+    Lista_Palete* aux1 = L;
+    Lista_Palete* p = NULL;
+    while (aux1 != NULL){
+        p = aux1->prox;
+        destruir_palete(aux1->p);
+        free(aux1);
+        aux1 = p;
     }
 }
+
 
