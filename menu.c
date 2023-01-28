@@ -14,6 +14,8 @@ int obter_opcao();
 Voo *obter_voo();
 void opcao_criar_voo(Lista_Voo **lista_voo);
 void opcao_despachar_bagagem(Lista_Palete **paletes, Lista_Voo *voos);
+void destruir_simulacao(Lista_Palete *P, Lista_Voo *Voos, Pista *p1, 
+Pista *p2, Pista *p3, Pista *p4);
 void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos);
 void opcao_despachar_bagagem_manual(Lista_Palete **paletes, Lista_Voo *voos);
 void opcao_carregar_bagagem(Lista_Palete *palete, Lista_Voo *voo);
@@ -379,18 +381,6 @@ void opcao_verificar_bagagem_voo(Lista_Voo *voo, Pista *p1, Pista *p2, Pista *p3
 	
 }
 
-bool bagagem_encontrada_voo(Lista_Voo *voos, char nome[]) {
-	Lista_Voo *aux = voos;
-	while (aux) {
-		for (int i = 0; i < MAX_PAL_VOO; i++) {
-			if (bagagem_encontrada_palete(aux->voo->paletes[i], nome))
-				return true;
-		}
-		aux = aux->prox;
-	}
-	return false;
-}
-
 int main () {
 	Pista *p1, *p2, *p3, *p4;
 	Lista_Voo *lista_voo = criar_lista_voo();
@@ -423,8 +413,6 @@ int main () {
 			opcao_aterrar(p3, p4);
 		else if (opcao == 8)
 			opcao_consultar_voos(lista_voo, p1, p2, p3, p4);
-		else if (opcao == 9)
-			opcao_verificar_bagagem_voo(lista_voo, p1, p2, p3, p4);
 	} while (opcao != 0);
 	return 0;
 }
