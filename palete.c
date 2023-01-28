@@ -19,6 +19,16 @@ Palete *criar_palete(int num_voo){
     return novo;
 }
 
+void imprimir_bagagens(Palete *p) {
+	if (!p) {
+		printf ("Erro: palete inexistente/nula\n");
+		return;
+	}
+	
+	for (int i = 0; i < NUM_MAX_PILHA; i++)
+		imprimir_pilha_bagagem(p->pilha_bagagens[i]);
+}
+
 void inserir_pilha_bagagens(Palete *p, Pilha_Bagagem *pilha_bagagens){
 	if (!p) {
 		printf ("Erro: palete inválida/nula\n");

@@ -15,6 +15,7 @@ struct tPalete{
 typedef struct tPalete Palete;
 
 Palete *criar_palete(int num_voo);
+void imprimir_bagagens(Palete *p);
 void inserir_pilha_bagagens(Palete *p, Pilha_Bagagem *pilha_bagagens);
 void inserir_bagagem(Palete *p, Bagagem *bag);
 bool palete_cheia(Palete *p);
