@@ -1,7 +1,10 @@
 #include "utils.h"
 
 int ler_linha(char str[], int num_char) {
-	int ch, i = 0;
+	int ch = getchar(), i = 0;
+	if (ch != '\n') 
+		str[i++] = ch;
+
 	while ((ch = getchar()) != '\n') {
 		if (i < num_char - 1)
 			str[i++] = ch;

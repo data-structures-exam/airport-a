@@ -54,7 +54,6 @@ Voo *obter_voo() {
 	scanf("%d", &num_voo);
 	printf ("Data do voo [formato DD/MM/AAAA]: ");
 	scanf ("%d/%d/%d", &dia, &mes, &ano);
-	getchar(); // remover o '\n' do buffer
 	printf ("Origem: ");
 	ler_linha(origem, STR_TAM_MAX);
 	printf ("Destino: ");
@@ -130,6 +129,11 @@ Bagagem *obter_bagagem(Lista_Voo *voos) {
 	return bag;
 }
 
+// opcao consultar malas---------
+
+void opcao_consultar_malas(Lista_Voo *voos, Lista_Palete *paletes) {
+	
+}
 
 // opcao aterrar------------
 
@@ -189,6 +193,8 @@ int main () {
 			opcao_criar_voo(&lista_voo);
 		else if (opcao == 2)
 			opcao_despachar_bagagem(lista_palete, lista_voo);
+		else if (opcao == 4)
+			opcao_consultar_malas(lista_voo, lista_palete);
 		else if (opcao == 7)
 			opcao_aterrar(p3, p4);
 		else if (opcao == 8)
