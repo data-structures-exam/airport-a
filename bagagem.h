@@ -14,6 +14,7 @@ struct tBagagem{
 
 typedef struct tBagagem Bagagem;
 Bagagem *criar_bagagem(char nome_passageiro[], int num_voo, float peso_kg);
+void imprimir_detalhes_bagagem(Bagagem *bag);
 int peso_valido(float peso);
 void destruir_bagagem(Bagagem *bag);
 
