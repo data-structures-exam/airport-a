@@ -261,6 +261,7 @@ void opcao_preparar_descolagem(Lista_Palete *paletes, Lista_Voo *voos, Pista *p1
 		enfileirar_voo(p1, voo);
 	else if (opcao == 2)
 		enfileirar_voo(p2, voo);
+	remover_voo(voos, voo);
 }
 
 // opcao levantar voo

@@ -41,7 +41,6 @@ void desenfileirar_voo(Pista *pista) {
 
 	if (!pista->ini) return;
 	
-	Voo *aux = pista->ini->voo;
 	pista->ini = pista->ini->prox;
 	if (pista_vazia(pista)) pista->fim = NULL;
 }
