@@ -426,7 +426,7 @@ int main () {
 		else if (opcao == 9)
 			opcao_verificar_bagagem_voo(lista_voo, p1, p2, p3, p4);
 		else if (opcao == 10)
-			opcao_destruir_simulacao(lista_palete, lista_voo, p1, p2, p3, p4)
+			opcao_destruir_simulacao(lista_palete, lista_voo, p1, p2, p3, p4);
 	} while (opcao != 0);
 	return 0;
 }
