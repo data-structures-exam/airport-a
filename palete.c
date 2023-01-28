@@ -29,6 +29,15 @@ void imprimir_bagagens(Palete *p) {
 		imprimir_pilha_bagagem(p->pilha_bagagens[i]);
 }
 
+bool bagagem_encontrada_palete(Palete *p, char nome[]) {
+	if (!p) return false;
+
+	for (int i = 0; i <= p->pos; i++) 
+		if(bagagem_encontrada(p->pilha_bagagens[i], nome))
+			return true;
+	return false;
+}
+
 void inserir_pilha_bagagens(Palete *p, Pilha_Bagagem *pilha_bagagens){
 	if (!p) {
 		printf ("Erro: palete inválida/nula\n");

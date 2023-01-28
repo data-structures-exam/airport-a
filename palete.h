@@ -18,6 +18,7 @@ Palete *criar_palete(int num_voo);
 void imprimir_bagagens(Palete *p);
 void inserir_pilha_bagagens(Palete *p, Pilha_Bagagem *pilha_bagagens);
 void inserir_bagagem(Palete *p, Bagagem *bag);
+bool bagagem_encontrada_palete(Palete *p, char nome[]);
 bool palete_cheia(Palete *p);
 bool limite_pilhas_atingido(Palete *p);
 bool palete_vazia(Palete *p);
