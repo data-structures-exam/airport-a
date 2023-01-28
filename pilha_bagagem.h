@@ -4,6 +4,7 @@
 #include "bagagem.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define MAX_BAGS_PILHA 3 // número máximo de bagagens por pilha
 
