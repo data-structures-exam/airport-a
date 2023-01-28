@@ -19,7 +19,7 @@ Bagagem *criar_bagagem(char nome_passageiro[], int num_voo, float peso_kg) {
 }
 
 void imprimir_detalhes_bagagem(Bagagem *bag) {
-	if (!p)	return;
+	if (!bag) return;
 	printf ("\tPassageiro(a): %s\n", bag->nome_passageiro);
 	printf ("\tPeso (em kg): %f\n\n", bag->peso_kg);
 }
