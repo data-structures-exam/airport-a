@@ -55,7 +55,12 @@ void inserir_bagagem(Palete *p, Bagagem *bag) {
 		return;
 	}
 
-	if (p->pos > -1 && pilha_cheia(p->pilha_bagagens[p->pos])) 
+	if (palete_vazia(p)) {
+		Pilha_Bagagem *novo = criar_pilha_bagagem(p->num_voo);
+		inserir_pilha_bagagens(p, novo);
+	}
+
+	if (pilha_cheia(p->pilha_bagagens[p->pos])) 
 		inserir_pilha_bagagens(p, criar_pilha_bagagem(p->num_voo));
 		
 	empilhar_bagagem(p->pilha_bagagens[p->pos], bag);		
