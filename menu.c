@@ -18,6 +18,7 @@ void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos);
 void opcao_despachar_bagagem_manual(Lista_Palete **paletes, Lista_Voo *voos);
 void opcao_carregar_bagagem(Lista_Palete *palete, Lista_Voo *voo);
 void opcao_preparar_descolagem(Lista_Palete *paletes, Lista_Voo *voos, Pista *p1, Pista *p2);
+void opcao_levantar_voo(Lista_Voo *voos, Pista *p1, Pista *p2);
 void opcao_consultar_malas(Lista_Palete *paletes, Lista_Voo *voos);
 Bagagem *obter_bagagem(Lista_Voo *voos);
 void opcao_aterrar(Pista *p3, Pista *p4);
@@ -260,6 +261,42 @@ void opcao_preparar_descolagem(Lista_Palete *paletes, Lista_Voo *voos, Pista *p1
 	else if (opcao == 2)
 		enfileirar_voo(p2, voo);
 }
+
+// opcao levantar voo
+
+void opcao_levantar_voo(Lista_Voo *voos, Pista *p1, Pista *p2) {
+	if (pista_vazia(p1) && pista_vazia(p2)) {
+		printf ("Erro: pistas vazias\n");
+		return;
+	}
+
+	int opcao;
+	do {
+		printf ("Selecione a pista de onde deseja autorizar a descolagem\n");
+		printf ("1 - Pista 1\n");
+		printf ("2 - Pista 2\n");
+		printf ("Escolha [1-2]: ");
+		scanf ("%d", &opcao);
+		if (opcao != 1 && opcao != 2)
+			printf ("Erro: escolha inválida\n");
+	} while (opcao != 1 && opcao != 2);
+
+	if (opcao == 1) {
+		if(pista_vazia(p1)) {
+			printf ("Erro: pista vazia\n");
+			return;
+		}
+		desenfileirar_voo(p1);
+	} 
+	else if (opcao == 2) {
+		if(pista_vazia(p2)) {
+			printf ("Erro: pista vazia\n");
+			return;
+		}
+		desenfileirar_voo(p2);
+	}
+}
+
 // opcao aterrar------------
 
 void opcao_aterrar(Pista *p3, Pista *p4) {
@@ -330,6 +367,8 @@ int main () {
 			opcao_consultar_malas(lista_palete, lista_voo);
 		else if (opcao == 5)
 			opcao_preparar_descolagem(lista_palete, lista_voo, p1, p2);
+		else if (opcao == 6)
+			opcao_levantar_voo(lista_voo, p1, p2);
 		else if (opcao == 7)
 			opcao_aterrar(p3, p4);
 		else if (opcao == 8)
