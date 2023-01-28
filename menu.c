@@ -16,6 +16,7 @@ void opcao_criar_voo(Lista_Voo **lista_voo);
 void opcao_despachar_bagagem(Lista_Palete **paletes, Lista_Voo *voos);
 void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos);
 void opcao_despachar_bagagem_manual(Lista_Palete **paletes, Lista_Voo *voos);
+void opcao_carregar_bagagem(Lista_Palete *palete, Lista_Voo *voo);
 void opcao_preparar_descolagem(Lista_Palete *paletes, Lista_Voo *voos, Pista *p1, Pista *p2);
 void opcao_consultar_malas(Lista_Palete *paletes, Lista_Voo *voos);
 Bagagem *obter_bagagem(Lista_Voo *voos);
@@ -167,6 +168,40 @@ Bagagem *obter_bagagem(Lista_Voo *voos) {
 	return bag;
 }
 
+// opcao carregar bagagem-----------
+void opcao_carregar_bagagem(Lista_Palete *paletes, Lista_Voo *voos) {
+	if (!voos) {
+		printf ("Erro: lista de voos vazia\n");
+		return;
+	}
+	
+	int opcao_voo, qtd_voos = count_voos(voos);
+	do {
+		imprimir_voos(voos);
+		printf ("Selecione o voo [1-%d]: ", qtd_voos);
+		scanf ("%d", &opcao_voo);
+		if (opcao_voo < 1 || opcao_voo > qtd_voos) 
+			printf ("Erro: opção inválida\n");
+	} while (opcao_voo < 1 || opcao_voo > qtd_voos);
+
+	Lista_Voo *voo = buscar_voo(voos, opcao_voo);
+	int num_voo = voo->voo->num;
+
+	int n = num_paletes_voo(paletes, num_voo);
+	
+	if (n == 0) {
+		printf ("Erro: voo não pode partir sem bagagens\n");
+		return;
+	}
+
+	for (int i = 1; i <= n; i++) {
+		Lista_Palete *palete = buscar_palete(paletes, num_voo, i);
+		carregar_palete(voo->voo, palete->p);
+	}
+
+	fechar_voo(voo->voo);
+}
+
 // opcao consultar malas---------
 
 void opcao_consultar_malas(Lista_Palete *paletes, Lista_Voo *voos) {
@@ -193,29 +228,22 @@ void opcao_consultar_malas(Lista_Palete *paletes, Lista_Voo *voos) {
 // opcao preparar descolagem
 
 void opcao_preparar_descolagem(Lista_Palete *paletes, Lista_Voo *voos, Pista *p1, Pista *p2) {
-	if (!voos) {
-		printf ("Erro: lista de voos vazia\n");
-		return;
-	}
-	
 	int opcao_voo, qtd_voos = count_voos(voos);
+
 	do {
-		imprimir_voos(voos);
+		imprimir_voos(voos);		
 		printf ("Selecione o voo [1-%d]: ", qtd_voos);
 		scanf ("%d", &opcao_voo);
 		if (opcao_voo < 1 || opcao_voo > qtd_voos) 
 			printf ("Erro: opção inválida\n");
 	} while (opcao_voo < 1 || opcao_voo > qtd_voos);
-	Lista_Voo *voo = buscar_voo(voos, opcao_voo);
-	int num_voo = voo->voo->num;
-
-	int n = num_paletes_voo(paletes, num_voo);
 	
-	if (n == 0) {
-		printf ("Erro: voo não pode partir sem bagagens\n");
+	Lista_Voo *voo = buscar_voo(voos, opcao_voo);
+	if (!voo_fechado(voo->voo)) {
+		printf ("Erro: as bagagens deste voo não foram carregadas\n");
 		return;
 	}
-
+	
 	int opcao;
 	do {
 		printf ("Selecione a pista para onde deseja enviar o avião\n");
@@ -226,13 +254,6 @@ void opcao_preparar_descolagem(Lista_Palete *paletes, Lista_Voo *voos, Pista *p1
 		if (opcao != 1 && opcao != 2)
 			printf ("Erro: escolha inválida\n");
 	} while (opcao != 1 && opcao != 2);
-
-	for (int i = 1; i <= n; i++) {
-		Lista_Palete *palete = buscar_palete(paletes, num_voo, i);
-		carregar_palete(voo->voo, palete->p);
-	}
-
-	fechar_voo(voo->voo);
 
 	if (opcao == 1)
 		enfileirar_voo(p1, voo);
@@ -303,6 +324,8 @@ int main () {
 			opcao_criar_voo(&lista_voo);
 		else if (opcao == 2)
 			opcao_despachar_bagagem(&lista_palete, lista_voo);
+		else if (opcao == 3)
+			opcao_carregar_bagagem(lista_palete, lista_voo);
 		else if (opcao == 4)
 			opcao_consultar_malas(lista_palete, lista_voo);
 		else if (opcao == 5)
