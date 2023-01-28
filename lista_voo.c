@@ -64,7 +64,7 @@ Voo *verificar_voo_numero(Lista_Voo *L, int num_voo){
 Lista_Voo *remover_voo(Lista_Voo **L, int num_voo){
     if(!L){
         printf("Erro: Lista de voos inexistente\n");
-        return;
+        return NULL;
     }
     
     Lista_Voo *aux, *to_remove;
@@ -74,7 +74,7 @@ Lista_Voo *remover_voo(Lista_Voo **L, int num_voo){
         *L = (*L)->prox;
         return to_remove;
     }
-    
+    // everything u
     Lista_Voo *cur  = *L;
     while(!lista_voo_vazia(cur->prox)){
         if(cur->prox->voo->num == num_voo){
@@ -86,6 +86,7 @@ Lista_Voo *remover_voo(Lista_Voo **L, int num_voo){
         
         cur = cur->prox;
     }
+    return NULL;
 }
 
 int lista_voo_vazia(Lista_Voo *L){
