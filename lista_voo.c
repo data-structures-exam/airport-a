@@ -24,13 +24,13 @@ void imprimir_voos(Lista_Voo *L) {
 	Lista_Voo *aux = L;
 	int i = 1;
 	while (aux) {
-		imprimir_voo(aux);
+		imprimir_voo(aux, i);
 		aux = aux->prox;
 		i++;
 	}
 }
 
-void imprimir_voo(Lista_Voo *L) {
+void imprimir_voo(Lista_Voo *L, int i) {
     if (lista_voo_vazia(L)) return;
     printf ("%d - Voo %d\n", i, L->voo->num);
 	printf ("\tData: %d/%d/%d\n", L->voo->data->dia, L->voo->data->mes, L->voo->data->ano);
