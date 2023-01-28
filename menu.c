@@ -4,6 +4,7 @@
 #include "utils.h"
 #include "voo.h" 
 #include "pista.h"
+#include "string.h"
 #include "bagagem.h"
 #include "lista_voo.h"
 #include "lista_palete.h"
@@ -96,7 +97,42 @@ void opcao_despachar_bagagem(Lista_Palete *paletes, Lista_Voo *voos) {
 }
 
 void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos) {
-
+	FILE *f = fopen("bagagem.txt", "r");
+	if(f != NULL){
+		//dados estao delimitados desta forma: nome,num_voo,peso
+		while(!feof(f)){
+			char buffer[100], nome[50], num_voo[20], peso[20];
+			memset(buffer, 0, sizeof(buffer));
+			fgets(buffer, 100, f);
+			strcpy(nome, strtok(buffer, ","));
+			strcpy(num_voo, strtok(NULL, ","));
+			strcpy(peso, strtok(NULL, "\n"));
+			Bagagem *bag = criar_bagagem(nome, atoi(num_voo), atof(peso));
+			if(!(bag->peso_kg  >=0.0 && bag->peso_kg<=32.0)){
+				printf ("Peso da bagagem invalido\n");
+				return;
+			}
+			//call  function
+			int encontrado = 0;
+			Lista_Voo *aux= voos;
+			while(aux){
+				if(aux->voo->num == bag->num_voo){
+					encontrado =1;
+					break;
+				}
+				aux = aux->prox;
+			}
+			if(!encontrado){
+				printf("Voo nao econtrado\n");
+				return;
+			}
+			inserir_bagagem_palete(paletes, bag);
+		}	
+		fclose(f);
+	}else{
+		puts("TESTE");
+	}
+	
 }
 
 void opcao_despachar_bagagem_manual(Lista_Palete *paletes, Lista_Voo *voos) {
