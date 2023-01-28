@@ -287,6 +287,8 @@ void opcao_levantar_voo(Lista_Voo *voos, Pista *p1, Pista *p2) {
 			printf ("Erro: pista vazia\n");
 			return;
 		}
+		remover_voo(voos, p1->ini->voo->num);
+		destruir_voo(p1->ini->voo);
 		desenfileirar_voo(p1);
 	} 
 	else if (opcao == 2) {
@@ -294,6 +296,8 @@ void opcao_levantar_voo(Lista_Voo *voos, Pista *p1, Pista *p2) {
 			printf ("Erro: pista vazia\n");
 			return;
 		}
+		remover_voo(voos, p2->ini->voo->num);
+		destruir_voo(p2->ini->voo);
 		desenfileirar_voo(p2);
 	}
 }
