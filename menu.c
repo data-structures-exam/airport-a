@@ -263,8 +263,14 @@ void opcao_aterrar(Pista *p3, Pista *p4) {
 // opcao consultar voos-------------
 void opcao_consultar_voos(Lista_Voo *voos, Pista *p1, Pista *p2, Pista *p3, Pista *p4) {
 	printf("Voos em preparação: \n");
-	imprimir_voos(voos);
-
+	Lista_Voo *aux = voos;
+	int i = 1;
+	while(aux) {
+		if (!voo_fechado(aux->voo)) 
+			imprimir_voo(aux, i++);
+		aux = aux->prox;
+	}
+	if (i == 1) printf ("Lista vazia\n\n");
 	printf("Voos em espera (partidas):\nPista 1: \n");
 	imprimir_voos(p1->ini);
 	printf("Pista 2: \n");
