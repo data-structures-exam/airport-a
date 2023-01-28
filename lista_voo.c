@@ -61,29 +61,30 @@ Voo *verificar_voo_numero(Lista_Voo *L, int num_voo){
     while(aux->voo->num != num_voo && aux)aux = aux->prox;
     return aux->voo;
 }
-void remover_voo(Lista_Voo **L, int num_voo){
+Lista_Voo *remover_voo(Lista_Voo **L, int num_voo){
     if(!L){
         printf("Erro: Lista de voos inexistente\n");
         return;
     }
-    Lista_Voo *aux;
+    
+    Lista_Voo *aux, *to_remove;
     if((*L)->voo->num == num_voo){
         aux = *L;
+        to_remove = *L;
         *L = (*L)->prox;
-        free(aux);
+        return to_remove;
     }
-    else{
-        Lista_Voo *cur  = *L;
-        while(!lista_voo_vazia(cur->prox)){
-            if(cur->prox->voo->num == num_voo){
-                aux = cur->prox;
-                cur->prox = cur->prox->prox;
-                free(aux);
-                break;
-            }
-            else
-                cur = cur->prox;
+    
+    Lista_Voo *cur  = *L;
+    while(!lista_voo_vazia(cur->prox)){
+        if(cur->prox->voo->num == num_voo){
+            aux = cur->prox;
+            to_remove = aux;
+            cur->prox = cur->prox->prox;
+            return to_remove;            
         }
+        
+        cur = cur->prox;
     }
 }
 
