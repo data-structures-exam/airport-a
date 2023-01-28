@@ -14,6 +14,12 @@ Pilha_Bagagem *criar_pilha_bagagem(int num_voo) {
 	return pilha;
 }
 
+void imprimir_pilha_bagagem(Pilha_Bagagem *pilha) {
+	for (int i = 0; i < MAX_BAGS_PILHA; i++)
+		imprimir_detalhes_bagagem(pilha->bagagens[i]);
+}
+
+
 void empilhar_bagagem(Pilha_Bagagem *pilha, Bagagem *bag) {
 	if (!pilha) {
 		printf ("Erro: pilha de bagagens inválida/nula\n");
