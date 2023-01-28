@@ -14,6 +14,8 @@ int obter_opcao();
 Voo *obter_voo();
 void opcao_criar_voo(Lista_Voo **lista_voo);
 void opcao_despachar_bagagem(Lista_Palete **paletes, Lista_Voo *voos);
+void destruir_simulacao(Lista_Palete *P, Lista_Voo *Voos, Pista *p1, 
+Pista *p2, Pista *p3, Pista *p4);
 void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos);
 void opcao_despachar_bagagem_manual(Lista_Palete **paletes, Lista_Voo *voos);
 void opcao_carregar_bagagem(Lista_Palete *palete, Lista_Voo *voo);
@@ -352,7 +354,16 @@ void opcao_consultar_voos(Lista_Voo *voos, Pista *p1, Pista *p2, Pista *p3, Pist
 	imprimir_voos(p4->ini);
 
 }
-
+void destruir_simulacao(Lista_Palete *P, Lista_Voo *Voos, Pista *p1, 
+Pista *p2, Pista *p3, Pista *p4){
+	destruir_lista_palete(P);
+	destruir_lista_voo(Voos);
+	destruir_pista(p1);
+	destruir_pista(p2);
+	destruir_pista(p3);
+	destruir_pista(p4);
+	puts("SIMULACAO DESTRUIDA\n");
+}
 int main () {
 	Pista *p1, *p2, *p3, *p4;
 	Lista_Voo *lista_voo = criar_lista_voo();
@@ -385,6 +396,8 @@ int main () {
 			opcao_aterrar(p3, p4);
 		else if (opcao == 8)
 			opcao_consultar_voos(lista_voo, p1, p2, p3, p4);
+		else if (opcao == 10)
+			destruir_simulacao(lista_palete, lista_voo, p1, p2, p3, p4);
 	} while (opcao != 0);
 	return 0;
 }
