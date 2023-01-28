@@ -84,11 +84,16 @@ int lista_voo_vazia(Lista_Voo *L){
 }
 
 void destruir_lista_voo(Lista_Voo *L){
-    while(!lista_voo_vazia(L)){
-        destruir_voo(L->voo);
-        free(L);
-	Lista_Voo *aux = L->prox;
-	L = aux;
-	if (aux) aux = aux->prox;
+    if(!L){
+        printf("Erro: Lista de voos vazia\n");
+        return;
+    }
+    Lista_Voo* aux1 = L;
+    Lista_Voo* p = NULL;
+    while (aux1 != NULL){
+        p = aux1->prox;
+        destruir_voo(aux1->voo);
+        free(aux1);
+        aux1 = p;
     }
 }
