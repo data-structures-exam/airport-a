@@ -379,6 +379,18 @@ void opcao_verificar_bagagem_voo(Lista_Voo *voo, Pista *p1, Pista *p2, Pista *p3
 	}
 }
 
+bool bagagem_encontrada_voo(Lista_Voo *voos, char nome[]) {
+	Lista_Voo *aux = voos;
+	while (aux) {
+		for (int i = 0; i < MAX_PAL_VOO; i++) {
+			if (bagagem_encontrada_palete(aux->voo->paletes[i], nome))
+				return true;
+		}
+		aux = aux->prox;
+	}
+	return false;
+}
+
 // opcao destruir simulacao
 void opcao_destruir_simulacao(Lista_Palete *P, Lista_Voo *Voos, Pista *p1, 
 Pista *p2, Pista *p3, Pista *p4){
