@@ -19,6 +19,7 @@ typedef struct tPista Pista;
 Pista *criar_pista(int num);
 void enfileirar_voo(Pista *pista, Lista_Voo *voo);
 void desenfileirar_voo(Pista *pista);
+bool pista_vazia(Pista *pista);
 void destruir_pista(Pista *pista);
 
 #endif

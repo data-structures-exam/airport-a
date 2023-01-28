@@ -1,4 +1,5 @@
 #include "pista.h"
+#include <stdbool.h>
 
 Pista *criar_pista(int num) {
 	Pista *pista = (Pista *)malloc(sizeof(Pista));
@@ -23,7 +24,7 @@ void enfileirar_voo(Pista *pista, Lista_Voo *voo) {
 		return;
 	}
 
-	if (!pista->ini) {
+	if (pista_vazia(pista)) {
 		pista->ini = pista->fim = voo;
 		return;
 	}
@@ -43,7 +44,11 @@ void desenfileirar_voo(Pista *pista) {
 	Voo *aux = pista->ini->voo;
 	pista->ini = pista->ini->prox;
 	destruir_voo(aux);
-	if (!pista->ini) pista->fim = NULL;
+	if (pista_vazia(pista)) pista->fim = NULL;
+}
+
+bool pista_vazia(Pista *pista) {
+	return pista->ini == NULL;
 }
 
 void destruir_pista(Pista *pista) {
