@@ -16,6 +16,7 @@ void opcao_criar_voo(Lista_Voo **lista_voo);
 void opcao_despachar_bagagem(Lista_Palete **paletes, Lista_Voo *voos);
 void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos);
 void opcao_despachar_bagagem_manual(Lista_Palete **paletes, Lista_Voo *voos);
+void opcao_preparar_descolagem(Lista_Palete *paletes, Lista_Voo *voos, Pista *p1, Pista *p2);
 void opcao_consultar_malas(Lista_Palete *paletes, Lista_Voo *voos);
 Bagagem *obter_bagagem(Lista_Voo *voos);
 void opcao_aterrar(Pista *p3, Pista *p4);
@@ -191,7 +192,7 @@ void opcao_consultar_malas(Lista_Palete *paletes, Lista_Voo *voos) {
 }
 // opcao preparar descolagem
 
-void opcao_preparar_descolagem(Lista_Voo *voos, Pista *p1, Pista *p2) {
+void opcao_preparar_descolagem(Lista_Palete *paletes, Lista_Voo *voos, Pista *p1, Pista *p2) {
 	if (!voos) {
 		printf ("Erro: lista de voos vazia\n");
 		return;
@@ -199,13 +200,14 @@ void opcao_preparar_descolagem(Lista_Voo *voos, Pista *p1, Pista *p2) {
 	
 	int opcao_voo, qtd_voos = count_voos(voos);
 	do {
+		imprimir_voos(voos);
 		printf ("Selecione o voo [1-%d]: ", qtd_voos);
 		scanf ("%d", &opcao_voo);
 		if (opcao_voo < 1 || opcao_voo > qtd_voos) 
 			printf ("Erro: opção inválida\n");
 	} while (opcao_voo < 1 || opcao_voo > qtd_voos);
-	Lista_Voo *voo = buscar_voo(voos, opcao);
-	num_voo = voo->voo->num;
+	Lista_Voo *voo = buscar_voo(voos, opcao_voo);
+	int num_voo = voo->voo->num;
 
 	int n = num_paletes_voo(paletes, num_voo);
 	
@@ -230,10 +232,12 @@ void opcao_preparar_descolagem(Lista_Voo *voos, Pista *p1, Pista *p2) {
 		carregar_palete(voo->voo, palete->p);
 	}
 
+	fechar_voo(voo->voo);
+
 	if (opcao == 1)
-		enfileirar_voo(voo, p1);
+		enfileirar_voo(p1, voo);
 	else if (opcao == 2)
-		enfileirar_voo(voo, p2);
+		enfileirar_voo(p2, voo);
 }
 // opcao aterrar------------
 
@@ -296,7 +300,7 @@ int main () {
 		else if (opcao == 4)
 			opcao_consultar_malas(lista_palete, lista_voo);
 		else if (opcao == 5)
-			opcao_preparar_descolagem(lista_voo)
+			opcao_preparar_descolagem(lista_palete, lista_voo, p1, p2);
 		else if (opcao == 7)
 			opcao_aterrar(p3, p4);
 		else if (opcao == 8)
