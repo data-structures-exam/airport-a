@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <stdbool.h>
 #include "utils.h"
 #include "voo.h" 
 #include "pista.h"
@@ -24,6 +24,8 @@ void imprimir_detalhes_malas(Lista_Palete *paletes, Lista_Voo *voos);
 Bagagem *obter_bagagem(Lista_Voo *voos);
 void opcao_aterrar(Pista *p3, Pista *p4);
 void opcao_consultar_voos(Lista_Voo *voos, Pista *p1, Pista *p2, Pista *p3, Pista *p4);
+void opcao_verificar_bagagem_voo(Lista_Voo *voo, Pista *p1, Pista *p2, Pista *p3, Pista *p4);
+bool bagagem_encontrada_voo(Lista_Voo *voos, char nome[]);
 
 void imprimir_menu_principal() {
 	printf ("1 - Criar voo\n");
@@ -353,6 +355,42 @@ void opcao_consultar_voos(Lista_Voo *voos, Pista *p1, Pista *p2, Pista *p3, Pist
 
 }
 
+// opcao verificar bagagem no voo
+
+void opcao_verificar_bagagem_voo(Lista_Voo *voo, Pista *p1, Pista *p2, Pista *p3, Pista *p4) {
+	if (!voo && !p1->ini && !p2->ini && !p3->ini && !p4->ini) {
+		printf ("Erro: nenhum voo criado\n");
+		return;
+	}
+
+	char nome[STR_TAM_MAX];
+	printf ("Nome do(a) passageiro(a): ");
+	ler_linha(nome, STR_TAM_MAX);
+	
+	if (bagagem_encontrada_voo(voo, nome) || bagagem_encontrada_voo(p1->ini, nome)
+		|| bagagem_encontrada_voo(p2->ini, nome) || bagagem_encontrada_voo(p3->ini, nome)
+		|| bagagem_encontrada_voo(p4->ini, nome)) {
+			printf ("Bagagem já está no porão\n");
+		}
+	else {
+		printf ("Nenhuma bagagem de '%s' foi encontrada no porão de algum avião\n", nome);
+	}
+	
+	
+}
+
+bool bagagem_encontrada_voo(Lista_Voo *voos, char nome[]) {
+	Lista_Voo *aux = voos;
+	while (aux) {
+		for (int i = 0; i < MAX_PAL_VOO; i++) {
+			if (bagagem_encontrada_palete(aux->voo->paletes[i], nome))
+				return true;
+		}
+		aux = aux->prox;
+	}
+	return false;
+}
+
 int main () {
 	Pista *p1, *p2, *p3, *p4;
 	Lista_Voo *lista_voo = criar_lista_voo();
@@ -385,6 +423,8 @@ int main () {
 			opcao_aterrar(p3, p4);
 		else if (opcao == 8)
 			opcao_consultar_voos(lista_voo, p1, p2, p3, p4);
+		else if (opcao == 9)
+			opcao_verificar_bagagem_voo(lista_voo, p1, p2, p3, p4);
 	} while (opcao != 0);
 	return 0;
 }
