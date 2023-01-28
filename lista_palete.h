@@ -20,7 +20,7 @@ void adicionar_palete(Lista_Palete **L, Palete *P);
 void remover_palete(Lista_Palete **L, int num_voo);
 bool lista_vazia(Lista_Palete *L);
 bool verificar_palete_numvoo(Lista_Palete *L, int num_voo);
-Lista_Palete *buscar_palete(Lista_Palete *L, int num_voo);
+Lista_Palete *buscar_palete(Lista_Palete *L, int num_voo, int i);
 void inserir_bagagem_palete(Lista_Palete *L, Bagagem *bag);
 int num_paletes_voo(Lista_Palete *L, int num_voo);
 void destruir_lista_palete(Lista_Palete *L);

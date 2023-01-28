@@ -14,19 +14,26 @@ void adicionar_palete(Lista_Palete **L, Palete *p){
     l->prox = *L;
     *L = l;
 }
+
+Lista_Palete *buscar_palete(Lista_Palete *L, int num_voo, int i) { // buscar i-ésimo voo da lista
+	int num;
+	if (lista_vazia(L) || (num = num_paletes_voo(L, num_voo)) == 0 || i > num) return NULL;
+	
+	Lista_Palete *aux = L;
+	int j = 0;
+	while (j <= i) {
+		if (aux->p->num_voo == num_voo) j++;
+		if (i == j) break;
+		aux = aux->prox;
+	}
+
+	return aux;
+}
+
 bool verificar_palete_numvoo(Lista_Palete *L, int num_voo){
     Lista_Palete *aux = L;
     while(aux->p->num_voo != num_voo && aux)aux = aux->prox;
     return aux != NULL;
-}
-
-Lista_Palete *buscar_palete(Lista_Palete *L, int num_voo) { // retorna a primeira ocorrência
-	Lista_Palete *aux = L;
-	while (aux) {
-		if (aux->p->num_voo == num_voo) break;
-		aux = aux->prox;
-	}
-	return aux;
 }
 
 void inserir_bagagem_palete(Lista_Palete *L, Bagagem *bag) {
@@ -35,7 +42,7 @@ void inserir_bagagem_palete(Lista_Palete *L, Bagagem *bag) {
 		return;
 	}
 
-	Lista_Palete *lp = buscar_palete(L, bag->num_voo);
+	Lista_Palete *lp = buscar_palete(L, bag->num_voo, 1);
 	
 	if (lp && num_paletes_voo(lp, bag->num_voo) >= MAX_PAL_VOO && 
 			palete_cheia(lp->p)) {
