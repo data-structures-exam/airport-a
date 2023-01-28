@@ -1,4 +1,4 @@
 *.o
-
+report/
 # ignorar executável
 menu
