@@ -112,7 +112,7 @@ void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos) {
                 return;
             }
 			Bagagem *bag = criar_bagagem(nome, atoi(num_voo), atof(peso));
-			if(!(bag->peso_kg  >=0.0 && bag->peso_kg<=32.0)){
+			if(!(bag->peso_kg  >0.0 && bag->peso_kg<=32.0)){
 				printf ("Peso da bagagem invalido\n");
 				return;
 			}
