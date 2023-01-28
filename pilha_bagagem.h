@@ -17,6 +17,7 @@ typedef struct tPilha_Bagagem Pilha_Bagagem;
 
 Pilha_Bagagem *criar_pilha_bagagem(int num_voo);
 void imprimir_pilha_bagagem(Pilha_Bagagem *pilha);
+bool bagagem_encontrada(Pilha_Bagagem *pilha, char nome[]);
 void empilhar_bagagem(Pilha_Bagagem *pilha, Bagagem *bag);
 void desempilhar_bagagem(Pilha_Bagagem *pilha);
 int pilha_vazia(Pilha_Bagagem *pilha);

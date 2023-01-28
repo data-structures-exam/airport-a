@@ -1,5 +1,6 @@
 
 #include "pilha_bagagem.h"
+#include <string.h>
 
 Pilha_Bagagem *criar_pilha_bagagem(int num_voo) {
 	Pilha_Bagagem *pilha = (Pilha_Bagagem *)malloc(sizeof(Pilha_Bagagem));
@@ -18,6 +19,15 @@ void imprimir_pilha_bagagem(Pilha_Bagagem *pilha) {
 	if (!pilha) return;
 	for (int i = 0; i < MAX_BAGS_PILHA; i++)
 		imprimir_detalhes_bagagem(pilha->bagagens[i]);
+}
+
+bool bagagem_encontrada(Pilha_Bagagem *pilha, char nome[]) {
+	if (!pilha) return false;
+	for (int i = 0; i <= pilha->topo; i++)
+		if (strcmp(pilha->bagagens[i]->nome_passageiro, nome) == 0)
+			return true;
+	return false;
+
 }
 
 
