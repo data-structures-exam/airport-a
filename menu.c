@@ -106,10 +106,11 @@ void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos) {
 		while(!feof(f)){
 			char buffer[100], nome[50], num_voo[20], peso[20];
 			memset(buffer, 0, sizeof(buffer));
-			fgets(buffer, 100, f);
-			strcpy(nome, strtok(buffer, ","));
-			strcpy(num_voo, strtok(NULL, ","));
-			strcpy(peso, strtok(NULL, "\n"));
+			//ler directamente do ficheiro
+            if (fscanf(f, "%s %s %s", nome,num_voo,peso) == 0) {
+                fprintf(stderr, "ERRO\n");
+                return;
+            }
 			Bagagem *bag = criar_bagagem(nome, atoi(num_voo), atof(peso));
 			if(!(bag->peso_kg  >=0.0 && bag->peso_kg<=32.0)){
 				printf ("Peso da bagagem invalido\n");
@@ -133,7 +134,7 @@ void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos) {
 		}	
 		fclose(f);
 	}else{
-		puts("TESTE");
+		puts("IMPOSSIVEL ABRIR O FICHEIRO");
 	}
 	
 }
