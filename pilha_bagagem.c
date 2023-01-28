@@ -9,6 +9,8 @@ Pilha_Bagagem *criar_pilha_bagagem(int num_voo) {
 	}
 	pilha->topo = -1;
 	pilha->num_voo = num_voo;
+	for (int i = 0; i < MAX_BAGS_PILHA; i++)
+		pilha->bagagens[i] = NULL;
 	return pilha;
 }
 
