@@ -15,6 +15,7 @@ void opcao_criar_voo(Lista_Voo **lista_voo);
 void opcao_despachar_bagagem(Lista_Palete *paletes, Lista_Voo *voos);
 void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos);
 void opcao_despachar_bagagem_manual(Lista_Palete *paletes, Lista_Voo *voos);
+void opcao_consultar_malas(Lista_Palete *paletes, Lista_Voo *voos);
 Bagagem *obter_bagagem(Lista_Voo *voos);
 void opcao_aterrar(Pista *p3, Pista *p4);
 void opcao_consultar_voos(Lista_Voo *voos, Pista *p1, Pista *p2, Pista *p3, Pista *p4);
@@ -131,7 +132,23 @@ Bagagem *obter_bagagem(Lista_Voo *voos) {
 
 // opcao consultar malas---------
 
-void opcao_consultar_malas(Lista_Voo *voos, Lista_Palete *paletes) {
+void opcao_consultar_malas(Lista_Palete *paletes, Lista_Voo *voos) {
+	Lista_Voo *aux = voos;
+	while (aux) {
+		int num_paletes = num_paletes_voo(paletes, aux->voo->num);
+		printf ("Voo %d (%s -> %s):\n", aux->voo->num, aux->voo->origem, aux->voo->destino);
+		if (num_paletes == 0) {
+			printf ("\tSem bagagens registadas\n\n");
+			aux = aux->prox;
+			continue;
+		}
+
+		for (int i = 1; i <= num_paletes; i++) {
+			Lista_Palete *lp = buscar_palete(paletes, aux->voo->num, i);
+			printf ("\tPalete %d: \n", i);
+			imprimir_bagagens(lp->p);
+		}
+	}
 	
 }
 
@@ -194,7 +211,7 @@ int main () {
 		else if (opcao == 2)
 			opcao_despachar_bagagem(lista_palete, lista_voo);
 		else if (opcao == 4)
-			opcao_consultar_malas(lista_voo, lista_palete);
+			opcao_consultar_malas(lista_palete, lista_voo);
 		else if (opcao == 7)
 			opcao_aterrar(p3, p4);
 		else if (opcao == 8)
