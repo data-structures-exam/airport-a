@@ -17,9 +17,10 @@ void opcao_despachar_bagagem(Lista_Palete **paletes, Lista_Voo *voos);
 void opcao_despachar_bagagem_auto(Lista_Palete *paletes, Lista_Voo *voos);
 void opcao_despachar_bagagem_manual(Lista_Palete **paletes, Lista_Voo *voos);
 void opcao_carregar_bagagem(Lista_Palete *palete, Lista_Voo *voo);
-void opcao_preparar_descolagem(Lista_Palete *paletes, Lista_Voo *voos, Pista *p1, Pista *p2);
-void opcao_levantar_voo(Lista_Voo *voos, Pista *p1, Pista *p2);
-void opcao_consultar_malas(Lista_Palete *paletes, Lista_Voo *voos);
+void opcao_preparar_descolagem(Lista_Palete *paletes, Lista_Voo **voos, Pista *p1, Pista *p2);
+void opcao_levantar_voo(Lista_Voo **voos, Pista *p1, Pista *p2);
+void opcao_consultar_malas(Lista_Palete *paletes, Lista_Voo *voos, Pista *p1, Pista *p2, Pista *p3, Pista *p4);
+void imprimir_detalhes_malas(Lista_Palete *paletes, Lista_Voo *voos);
 Bagagem *obter_bagagem(Lista_Voo *voos);
 void opcao_aterrar(Pista *p3, Pista *p4);
 void opcao_consultar_voos(Lista_Voo *voos, Pista *p1, Pista *p2, Pista *p3, Pista *p4);
@@ -187,6 +188,10 @@ void opcao_carregar_bagagem(Lista_Palete *paletes, Lista_Voo *voos) {
 	} while (opcao_voo < 1 || opcao_voo > qtd_voos);
 
 	Lista_Voo *voo = buscar_voo(voos, opcao_voo);
+	if(voo_fechado(voo->voo)) {
+		printf ("Voo já carregado\n");
+		return;
+	}
 	int num_voo = voo->voo->num;
 
 	int n = num_paletes_voo(paletes, num_voo);
@@ -206,7 +211,15 @@ void opcao_carregar_bagagem(Lista_Palete *paletes, Lista_Voo *voos) {
 
 // opcao consultar malas---------
 
-void opcao_consultar_malas(Lista_Palete *paletes, Lista_Voo *voos) {
+void opcao_consultar_malas(Lista_Palete *paletes, Lista_Voo *voos, Pista *p1, Pista *p2, Pista *p3, Pista *p4) {
+	imprimir_detalhes_malas(paletes, voos);
+	imprimir_detalhes_malas(paletes, p1->ini);
+	imprimir_detalhes_malas(paletes, p2->ini);
+	imprimir_detalhes_malas(paletes, p3->ini);
+	imprimir_detalhes_malas(paletes, p4->ini);
+}
+
+void imprimir_detalhes_malas(Lista_Palete *paletes, Lista_Voo *voos) {
 	Lista_Voo *aux = voos;
 	while (aux) {
 		int num_paletes = num_paletes_voo(paletes, aux->voo->num);
@@ -225,22 +238,21 @@ void opcao_consultar_malas(Lista_Palete *paletes, Lista_Voo *voos) {
 
 		aux = aux->prox;
 	}
-	
 }
 // opcao preparar descolagem
 
-void opcao_preparar_descolagem(Lista_Palete *paletes, Lista_Voo *voos, Pista *p1, Pista *p2) {
-	int opcao_voo, qtd_voos = count_voos(voos);
+void opcao_preparar_descolagem(Lista_Palete *paletes, Lista_Voo **voos, Pista *p1, Pista *p2) {
+	int opcao_voo, qtd_voos = count_voos(*voos);
 
 	do {
-		imprimir_voos(voos);		
+		imprimir_voos(*voos);		
 		printf ("Selecione o voo [1-%d]: ", qtd_voos);
 		scanf ("%d", &opcao_voo);
 		if (opcao_voo < 1 || opcao_voo > qtd_voos) 
 			printf ("Erro: opção inválida\n");
 	} while (opcao_voo < 1 || opcao_voo > qtd_voos);
 	
-	Lista_Voo *voo = buscar_voo(voos, opcao_voo);
+	Lista_Voo *voo = buscar_voo(*voos, opcao_voo);
 	if (!voo_fechado(voo->voo)) {
 		printf ("Erro: as bagagens deste voo não foram carregadas\n");
 		return;
@@ -261,12 +273,12 @@ void opcao_preparar_descolagem(Lista_Palete *paletes, Lista_Voo *voos, Pista *p1
 		enfileirar_voo(p1, voo);
 	else if (opcao == 2)
 		enfileirar_voo(p2, voo);
-	remover_voo(voos, voo);
+	remover_voo(voos, voo->voo->num);
 }
 
 // opcao levantar voo
 
-void opcao_levantar_voo(Lista_Voo *voos, Pista *p1, Pista *p2) {
+void opcao_levantar_voo(Lista_Voo **voos, Pista *p1, Pista *p2) {
 	if (pista_vazia(p1) && pista_vazia(p2)) {
 		printf ("Erro: pistas vazias\n");
 		return;
@@ -327,14 +339,8 @@ void opcao_aterrar(Pista *p3, Pista *p4) {
 // opcao consultar voos-------------
 void opcao_consultar_voos(Lista_Voo *voos, Pista *p1, Pista *p2, Pista *p3, Pista *p4) {
 	printf("Voos em preparação: \n");
-	Lista_Voo *aux = voos;
-	int i = 1;
-	while(aux) {
-		if (!voo_fechado(aux->voo)) 
-			imprimir_voo(aux, i++);
-		aux = aux->prox;
-	}
-	if (i == 1) printf ("Lista vazia\n\n");
+	imprimir_voos(voos);
+
 	printf("Voos em espera (partidas):\nPista 1: \n");
 	imprimir_voos(p1->ini);
 	printf("Pista 2: \n");
@@ -370,11 +376,11 @@ int main () {
 		else if (opcao == 3)
 			opcao_carregar_bagagem(lista_palete, lista_voo);
 		else if (opcao == 4)
-			opcao_consultar_malas(lista_palete, lista_voo);
+			opcao_consultar_malas(lista_palete, lista_voo, p1, p2, p3, p4);
 		else if (opcao == 5)
-			opcao_preparar_descolagem(lista_palete, lista_voo, p1, p2);
+			opcao_preparar_descolagem(lista_palete, &lista_voo, p1, p2);
 		else if (opcao == 6)
-			opcao_levantar_voo(lista_voo, p1, p2);
+			opcao_levantar_voo(&lista_voo, p1, p2);
 		else if (opcao == 7)
 			opcao_aterrar(p3, p4);
 		else if (opcao == 8)
