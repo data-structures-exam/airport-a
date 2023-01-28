@@ -24,13 +24,17 @@ void imprimir_voos(Lista_Voo *L) {
 	Lista_Voo *aux = L;
 	int i = 1;
 	while (aux) {
-		printf ("%d - Voo %d\n", i, aux->voo->num);
-		printf ("\tData: %d/%d/%d\n", aux->voo->data->dia, aux->voo->data->mes, aux->voo->data->ano);
-		printf ("\t%s -> %s\n\n", aux->voo->origem, aux->voo->destino);
-
+		imprimir_voo(aux);
 		aux = aux->prox;
 		i++;
 	}
+}
+
+void imprimir_voo(Lista_Voo *L) {
+    if (lista_voo_vazia(L)) return;
+    printf ("%d - Voo %d\n", i, L->voo->num);
+	printf ("\tData: %d/%d/%d\n", L->voo->data->dia, L->voo->data->mes, L->voo->data->ano);
+	printf ("\t%s -> %s\n\n", L->voo->origem, L->voo->destino);
 }
 
 Lista_Voo *buscar_voo(Lista_Voo *L, int i) { // buscar i-ésimo voo da lista
